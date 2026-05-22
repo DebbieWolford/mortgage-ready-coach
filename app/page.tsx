@@ -135,7 +135,7 @@ export default function MortgageReadyCoach() {
           </div>
 
           <nav className="hidden gap-3 md:flex">
-            {["Landing", "Quiz", "Results", "Coach", "Dashboard"].map((item) => (
+            {["Landing", "Quiz", "Results", "Coach", "Lead", "Dashboard"].map((item) => (
               <button
                 key={item}
                 onClick={() => setScreen(item.toLowerCase())}
@@ -397,7 +397,38 @@ export default function MortgageReadyCoach() {
             </CardContent>
           </Card>
         )}
+{screen === "lead" && (
+  <Card className="rounded-3xl">
+    <CardContent className="p-8">
+      <h1 className="mb-2 text-3xl font-extrabold">Request Mortgage Guidance</h1>
+      <p className="mb-6 text-slate-600">
+        Collect borrower contact details for follow-up guidance.
+      </p>
 
+      <div className="grid gap-4 md:grid-cols-2">
+        {["Full Name", "Email", "Phone", "State"].map((label) => (
+          <input
+            key={label}
+            className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
+            placeholder={label}
+          />
+        ))}
+
+        <select className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm md:col-span-2">
+          <option>Loan Goal</option>
+          <option>Buy a home</option>
+          <option>Refinance</option>
+          <option>Improve readiness first</option>
+          <option>Speak with a mortgage professional</option>
+        </select>
+      </div>
+
+      <Button className="mt-6 bg-slate-950 px-6 py-6 text-white">
+        Request Guidance
+      </Button>
+    </CardContent>
+  </Card>
+)}
         {screen === "dashboard" && (
           <Card className="rounded-3xl">
             <CardContent className="p-8">
