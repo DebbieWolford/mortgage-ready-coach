@@ -397,8 +397,7 @@ const [chatHistory, setChatHistory] = useState<
             {chatHistory.length === 0 ? (
               <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-sm">
                 <p className="mb-2 font-bold">Mortgage Ready Coach</p>
-                <p className="text-sm leading-6">{answer}</p>
-              </div>
+                              </div>
             ) : (
               chatHistory.map((chat, index) => (
                 <div
