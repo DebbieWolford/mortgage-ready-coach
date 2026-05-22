@@ -423,7 +423,15 @@ export default function MortgageReadyCoach() {
         </select>
       </div>
 
-      <Button   className="mt-6 bg-slate-950 px-6 py-6 text-white"   onClick={() => {     alert("Thank you! A mortgage professional will contact you soon.");   }} >
+      <Button   className="mt-6 bg-slate-950 px-6 py-6 text-white"   onClick={() => {     alert("Thank you! A mortgage professional will contact you soon.");
+
+setLeadForm({
+  name: "",
+  email: "",
+  phone: "",
+  state: "",
+  goal: "",
+});   }} >
         Request Guidance
       </Button>
     </CardContent>
