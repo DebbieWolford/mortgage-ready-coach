@@ -402,7 +402,7 @@ export default function MortgageReadyCoach() {
     <CardContent className="p-8">
       <h1 className="mb-2 text-3xl font-extrabold">Request Mortgage Guidance</h1>
       <p className="mb-6 text-slate-600">
-        Collect borrower contact details for follow-up guidance.
+        Collect borrower contact details for personalized follow-up guidance.
       </p>
 
       <div className="grid gap-4 md:grid-cols-2">
