@@ -104,7 +104,7 @@ export default function MortgageReadyCoach() {
           </div>
 
           <nav className="hidden gap-3 md:flex">
-            {["Landing", "Quiz", "Results", "Dashboard"].map((item) => (
+            {["Landing", "Quiz", "Results", "Coach", "Dashboard"].map((item) => (
               <button
                 key={item}
                 onClick={() => setScreen(item.toLowerCase())}
@@ -188,7 +188,15 @@ export default function MortgageReadyCoach() {
                     { icon: BrainCircuit, title: "AI Mortgage Coach", text: "Get plain-English readiness guidance." },
                     { icon: LayoutDashboard, title: "Borrower Dashboard", text: "Track progress and next steps." },
                   ].map((item) => (
-                    <div key={item.title} className="flex items-center gap-4 rounded-2xl bg-slate-50 p-5">
+                   <button
+  key={item.title}
+  onClick={() => {
+    if (item.title === "AI Mortgage Coach") {
+      setScreen("coach");
+    }
+  }}
+  className="flex w-full items-center gap-4 rounded-2xl bg-slate-50 p-5 text-left hover:bg-slate-100"
+>
                       <div className="rounded-xl bg-white p-3 shadow-sm">
                         <item.icon className="h-5 w-5" />
                       </div>
@@ -309,7 +317,67 @@ export default function MortgageReadyCoach() {
             </CardContent>
           </Card>
         )}
+{screen === "coach" && (
+  <Card className="rounded-3xl">
+    <CardContent className="p-8">
+      <h1 className="mb-2 text-3xl font-extrabold">AI Mortgage Coach</h1>
 
+      <p className="mb-6 text-slate-600">
+        Ask mortgage-readiness questions and receive educational guidance.
+      </p>
+
+      <div className="grid gap-6 md:grid-cols-3">
+        <div className="space-y-3">
+          {[
+            "How can I improve my credit?",
+            "What documents do I need?",
+            "How does DTI affect approval?",
+            "What hurts underwriting?"
+          ].map((prompt) => (
+            <button
+              key={prompt}
+              className="w-full rounded-2xl bg-slate-100 p-4 text-left text-sm font-semibold hover:bg-slate-200"
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
+
+        <div className="md:col-span-2 rounded-3xl bg-slate-50 p-6">
+          <div className="mb-4 rounded-2xl bg-white p-4 shadow-sm">
+            <p className="text-sm font-bold">Borrower</p>
+
+            <p className="text-slate-600">
+              What can I do to become mortgage ready?
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-sm">
+            <p className="text-sm font-bold">Mortgage Ready Coach</p>
+
+            <p className="mt-2 text-sm leading-6">
+              Start by reviewing your credit profile, reducing debt where possible,
+              organizing income and asset documentation, and avoiding major financial
+              changes before applying. A licensed mortgage professional can review
+              your specific situation in more detail.
+            </p>
+          </div>
+
+          <div className="mt-6 flex gap-3">
+            <input
+              className="flex-1 rounded-xl border border-slate-200 px-4 py-3 text-sm"
+              placeholder="Ask your mortgage question..."
+            />
+
+            <Button className="bg-slate-950 text-white">
+              Ask
+            </Button>
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+)}
         {screen === "dashboard" && (
           <Card className="rounded-3xl">
             <CardContent className="p-8">
