@@ -204,7 +204,7 @@ export default function MortgageReadyCoach() {
                         <h3 className="font-bold">{item.title}</h3>
                         <p className="text-sm text-slate-500">{item.text}</p>
                       </div>
-                    </div>
+                    </button>
                   ))}
                 </CardContent>
               </Card>
