@@ -92,59 +92,93 @@ const [chatHistory, setChatHistory] = useState<
   if (!question.trim()) return;
 
   const q = question.toLowerCase();
-
+const topics: string[] = [];
   let response =
     "Mortgage readiness usually includes stable income, manageable debt, organized documents, acceptable credit history, and enough funds for down payment and closing costs.";
 
   if (q.includes("credit") || q.includes("score")) {
-    response =
+  topics.push("credit");
+
+  response =
       "Improving credit may include making payments on time, reducing credit card balances, avoiding new credit inquiries, and reviewing your credit report for errors.";
   } else if (q.includes("w2") || q.includes("w-2") || q.includes("w's")) {
+    topics.push("w2");
+    
     response =
       "Many lenders review a 2-year employment and income history, often using W-2s, pay stubs, and verification of employment. Some borrowers with less than 2 years may still qualify depending on job history, education, and loan program.";
   } else if (q.includes("self-employed") || q.includes("self employed") || q.includes("business owner")) {
+    topics.push("selfemployed");
+    
     response =
       "Self-employed borrowers are commonly asked for 2 years of tax returns, profit-and-loss information, business bank statements, and stable income documentation.";
-  } else if (q.includes("fha")) {
-    response =
+ } else if (q.includes("fha")) {
+  topics.push("fha");
+
+  response =
       "FHA loans may allow more flexible credit and down payment options than some conventional loans, but borrowers still need stable income, acceptable debt levels, and required documentation.";
   } else if (q.includes("va loan") || q.includes(" va ")) {
+    topics.push("va");
+    
     response =
       "VA loans may offer strong benefits for eligible veterans, service members, and some surviving spouses. Borrowers still need income, credit, VA eligibility, and property approval.";
   } else if (q.includes("conventional")) {
+    topics.push("conventional");
+    
     response =
       "Conventional loans often consider credit score, DTI, down payment, reserves, income stability, and property eligibility. Stronger credit and lower debt can help readiness.";
   } else if (q.includes("dti") || q.includes("debt")) {
-    response =
+  topics.push("dti");
+
+  response =
       "DTI means debt-to-income ratio. It compares monthly debt payments to gross monthly income. Lower DTI ratios generally improve mortgage readiness.";
   } else if (q.includes("down payment")) {
+    topics.push("downpayment");
+    
     response =
       "Down payment requirements vary by loan type. Some programs allow low down payments, but borrowers should also prepare for closing costs, reserves, inspections, and moving expenses.";
   } else if (q.includes("closing cost")) {
+    topics.push("closingcost");
+    
     response =
       "Closing costs may include lender fees, title fees, appraisal, escrow setup, prepaid taxes, insurance, and recording fees. Buyers should prepare for these in addition to the down payment.";
   } else if (q.includes("document")) {
+    topics.push("document");
+    
     response =
       "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, ID, employment history, and explanations for large deposits.";
   } else if (q.includes("underwriting")) {
-    response =
+  topics.push("underwriting");
+
+  response =
       "Underwriting concerns may include missing documents, large unexplained deposits, new debt, credit changes, income instability, appraisal issues, or property condition concerns.";
   } else if (q.includes("condo")) {
+    topics.push("condo");
+    
     response =
       "Condo loans may require both borrower approval and condo project review. Lenders may look at HOA finances, insurance, occupancy, litigation, and project eligibility.";
   } else if (q.includes("bankruptcy")) {
+    topics.push("bankruptcy");
+    
     response =
       "A prior bankruptcy does not always prevent mortgage approval, but lenders usually review the discharge date, re-established credit, payment history, and loan program waiting periods.";
   } else if (q.includes("foreclosure")) {
+    topics.push("foreclosure");
+    
     response =
       "A prior foreclosure may require a waiting period depending on the loan program. Lenders also review re-established credit, income stability, and the reason for the prior hardship.";
   } else if (q.includes("large deposit")) {
+    topics.push("largedeposit");
+    
     response =
       "Large deposits often need to be sourced and explained. Lenders may ask for documentation showing where the money came from and whether it must be repaid.";
   } else if (q.includes("employment gap") || q.includes("job gap") || q.includes("gap")) {
+    topics.push("employment");
+    
     response =
       "Employment gaps may need to be explained. Lenders often look for stable, continuing income and may ask for documentation about job changes or gaps.";
   } else if (q.includes("preapproval") || q.includes("pre-approval")) {
+    topics.push("preapproval");
+    
     response =
       "For preapproval, borrowers usually provide income documents, asset statements, credit authorization, ID, employment history, and information about debts and housing goals.";
   }
