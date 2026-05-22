@@ -40,6 +40,7 @@ const [leadForm, setLeadForm] = useState({
 });
 
 const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leads, setLeads] = useState<any[]>([]);
   const updateAnswer = (field: string, value: string) => {
     setAnswers({ ...answers, [field]: value });
   };
@@ -481,9 +482,10 @@ const [leadSubmitted, setLeadSubmitted] = useState(false);
       <Button
         className="mt-6 bg-slate-950 px-6 py-6 text-white"
         onClick={() => {
-          setLeadSubmitted(true);
+  setLeads([...leads, leadForm]);
+  setLeadSubmitted(true);
 
-          setLeadForm({
+  setLeadForm({
             name: "",
             email: "",
             phone: "",
@@ -519,6 +521,10 @@ const [leadSubmitted, setLeadSubmitted] = useState(false);
                   <p className="mt-2 text-sm text-slate-600">
                     Review readiness gaps and prepare documents.
                   </p>
+                  <div className="rounded-2xl bg-slate-50 p-5">
+  <h3 className="font-bold">Captured Leads</h3>
+  <p className="mt-2 text-3xl font-extrabold">{leads.length}</p>
+</div>
                 </div>
               </div>
             </CardContent>
