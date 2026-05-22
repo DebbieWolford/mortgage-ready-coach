@@ -536,7 +536,7 @@ const readinessLabel =
             <CardContent className="p-8">
               <h1 className="mb-4 text-3xl font-extrabold">Borrower Dashboard</h1>
               <p className="mb-6 text-slate-600">
-                Track readiness, documents, and next steps.
+                Track readiness, documents, leads, and next steps.
               </p>
 
               <div className="grid gap-4 md:grid-cols-3">
