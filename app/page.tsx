@@ -76,8 +76,7 @@ const [chatHistory, setChatHistory] = useState<
   };
 
   const score = calculateScore();
-  const score = calculateScore();
-
+  
 const readinessLabel =
   score >= 80
     ? "Excellent"
