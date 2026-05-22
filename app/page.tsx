@@ -365,74 +365,74 @@ const [chatHistory, setChatHistory] = useState<
         )}
 
         {screen === "coach" && (
-          <Card className="rounded-3xl">
-            <CardContent className="p-8">
-              <h1 className="mb-2 text-3xl font-extrabold">AI Mortgage Coach</h1>
-              <p className="mb-6 text-slate-600">
-                Ask mortgage-readiness questions and receive educational guidance.
-              </p>
+  <Card className="rounded-3xl">
+    <CardContent className="p-8">
+      <h1 className="mb-2 text-3xl font-extrabold">AI Mortgage Coach</h1>
+      <p className="mb-6 text-slate-600">
+        Ask mortgage-readiness questions and receive educational guidance.
+      </p>
 
-              <div className="grid gap-6 md:grid-cols-3">
-                <div className="space-y-3">
-                  {[
-                    "How can I improve my credit?",
-                    "What documents do I need?",
-                    "How does DTI affect approval?",
-                    "What hurts underwriting?",
-                  ].map((prompt) => (
-                    <button
-                      key={prompt}
-                      onClick={() => {
-                        setQuestion(prompt);
-                        setTimeout(() => askCoach(), 0);
-                      }}
-                      className="w-full rounded-2xl bg-slate-100 p-4 text-left text-sm font-semibold hover:bg-slate-200"
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
+      <div className="grid gap-6 md:grid-cols-3">
+        <div className="space-y-3">
+          {[
+            "How can I improve my credit?",
+            "What documents do I need?",
+            "How does DTI affect approval?",
+            "What hurts underwriting?",
+          ].map((prompt) => (
+            <button
+              key={prompt}
+              onClick={() => {
+                setQuestion(prompt);
+              }}
+              className="w-full rounded-2xl bg-slate-100 p-4 text-left text-sm font-semibold hover:bg-slate-200"
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
 
-               <div className="rounded-3xl bg-slate-50 p-6 md:col-span-2">
-  <div className="space-y-4">
-    {chatHistory.length === 0 && (
-      <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-sm">
-        <p className="mb-2 font-bold">Mortgage Ready Coach</p>
-        <p className="text-sm leading-6">{answer}</p>
-      </div>
-    )}
-
-    {chatHistory.map((chat, index) => (
-      <div
-        key={index}
-        className={`rounded-2xl p-5 ${
-          chat.role === "Borrower" ? "bg-white" : "bg-slate-950 text-white"
-        }`}
-      >
-        <p className="mb-2 font-bold">{chat.role}</p>
-        <p className="text-sm leading-6">{chat.message}</p>
-      </div>
-    ))}
-  </div>
-
-  <div className="mt-6 flex gap-3">
-    <input
-      value={question}
-      onChange={(e) => setQuestion(e.target.value)}
-      className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
-      placeholder="Ask your mortgage question..."
-    />
-
-    <Button onClick={askCoach} className="bg-slate-950 text-white">
-      Ask
-    </Button>
-  </div>
-</div>
-                </div>
+        <div className="rounded-3xl bg-slate-50 p-6 md:col-span-2">
+          <div className="space-y-4">
+            {chatHistory.length === 0 ? (
+              <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-sm">
+                <p className="mb-2 font-bold">Mortgage Ready Coach</p>
+                <p className="text-sm leading-6">{answer}</p>
               </div>
-            </CardContent>
-          </Card>
-        )}
+            ) : (
+              chatHistory.map((chat, index) => (
+                <div
+                  key={index}
+                  className={`rounded-2xl p-5 ${
+                    chat.role === "Borrower"
+                      ? "bg-white"
+                      : "bg-slate-950 text-white"
+                  }`}
+                >
+                  <p className="mb-2 font-bold">{chat.role}</p>
+                  <p className="text-sm leading-6">{chat.message}</p>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="mt-6 flex gap-3">
+            <input
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
+              placeholder="Ask your mortgage question..."
+            />
+
+            <Button onClick={askCoach} className="bg-slate-950 text-white">
+              Ask
+            </Button>
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+)}
 {screen === "lead" && (
   <Card className="rounded-3xl">
     <CardContent className="p-8">
