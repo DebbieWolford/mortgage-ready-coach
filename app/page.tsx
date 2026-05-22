@@ -539,6 +539,13 @@ const [chatHistory, setChatHistory] = useState<
                   <p className="mt-2 text-3xl font-extrabold">{score}</p>
                 </div>
                 <div className="rounded-2xl bg-slate-50 p-5">
+  <h3 className="font-bold">Readiness Status</h3>
+  <p className="mt-2 text-xl font-extrabold">{readinessLabel}</p>
+  <p className="mt-2 text-sm text-slate-600">
+    Based on the borrower’s quiz answers.
+  </p>
+</div>
+                <div className="rounded-2xl bg-slate-50 p-5">
                   <h3 className="font-bold">Documents</h3>
                   <p className="mt-2 text-3xl font-extrabold">In Progress</p>
                 </div>
