@@ -18,18 +18,17 @@ import {
 
 export default function MortgageReadyCoach() {
   const [screen, setScreen] = useState("landing");
-  const [question, setQuestion] = useState("");
-const [answer, setAnswer] = useState(
-  "Start by reviewing your credit profile, reducing debt where possible, organizing income and asset documentation, and avoiding major financial changes before applying. A licensed mortgage professional can review your specific situation in more detail."
-);
   const [progress, setProgress] = useState(15);
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState(
+    "Start by reviewing your credit profile, reducing debt where possible, organizing income and asset documentation, and avoiding major financial changes before applying. A licensed mortgage professional can review your specific situation in more detail."
+  );
 
   const [answers, setAnswers] = useState({
     credit: "",
     income: "",
     dti: "",
     downPayment: "",
-    employment: "",
     documents: "",
   });
 
@@ -66,16 +65,44 @@ const [answer, setAnswer] = useState(
 
   const score = calculateScore();
 
-  const getReadinessLabel = () => {
-    if (score >= 80) return "Strong Mortgage Readiness";
-    if (score >= 60) return "Moderate Mortgage Readiness";
-    if (score >= 40) return "Needs Preparation";
-    return "Early Preparation Stage";
+  const readinessLabel =
+    score >= 80
+      ? "Strong Mortgage Readiness"
+      : score >= 60
+      ? "Moderate Mortgage Readiness"
+      : score >= 40
+      ? "Needs Preparation"
+      : "Early Preparation Stage";
+
+  const askCoach = () => {
+    const q = question.toLowerCase();
+
+    if (q.includes("credit")) {
+      setAnswer(
+        "Improving credit may include making all payments on time, reducing credit card balances, avoiding new credit inquiries, and checking your credit report for errors."
+      );
+    } else if (q.includes("dti") || q.includes("debt")) {
+      setAnswer(
+        "DTI means debt-to-income ratio. It compares monthly debt payments to gross monthly income. Lower debt and stable income may improve mortgage readiness."
+      );
+    } else if (q.includes("document")) {
+      setAnswer(
+        "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, identification, and documentation for large deposits."
+      );
+    } else if (q.includes("underwriting")) {
+      setAnswer(
+        "Underwriting delays can happen because of missing documents, unexplained deposits, new debt, credit changes, income questions, or property-related issues."
+      );
+    } else {
+      setAnswer(
+        "Mortgage readiness usually includes stable income, manageable debt, organized documents, acceptable credit history, and enough funds for down payment and closing costs."
+      );
+    }
   };
 
   const questionBlock = (
     label: string,
-    field: string,
+    field: keyof typeof answers,
     options: { label: string; value: string }[]
   ) => (
     <div className="rounded-2xl bg-slate-50 p-5">
@@ -86,7 +113,7 @@ const [answer, setAnswer] = useState(
             key={option.value}
             onClick={() => updateAnswer(field, option.value)}
             className={`rounded-xl border p-4 text-left text-sm font-medium hover:bg-white ${
-              answers[field as keyof typeof answers] === option.value
+              answers[field] === option.value
                 ? "border-slate-950 bg-white shadow-sm"
                 : "border-slate-200 bg-slate-50"
             }`}
@@ -140,8 +167,8 @@ const [answer, setAnswer] = useState(
                     End-to-End Mortgage Readiness Platform
                   </h1>
                   <p className="text-slate-600">
-                    Help future borrowers understand credit, income, documents,
-                    DTI, and underwriting readiness before they apply.
+                    Help future borrowers understand credit, income, documents, DTI,
+                    and underwriting readiness before they apply.
                   </p>
                 </div>
 
@@ -187,20 +214,16 @@ const [answer, setAnswer] = useState(
               <Card className="rounded-3xl">
                 <CardContent className="space-y-4 p-8">
                   {[
-                    { icon: ClipboardList, title: "Readiness Quiz", text: "Check income, credit, assets, and debt." },
-                    { icon: FileText, title: "Document Checklist", text: "Know what to gather before applying." },
-                    { icon: BrainCircuit, title: "AI Mortgage Coach", text: "Get plain-English readiness guidance." },
-                    { icon: LayoutDashboard, title: "Borrower Dashboard", text: "Track progress and next steps." },
+                    { icon: ClipboardList, title: "Readiness Quiz", text: "Check income, credit, assets, and debt.", screen: "quiz" },
+                    { icon: FileText, title: "Document Checklist", text: "Know what to gather before applying.", screen: "dashboard" },
+                    { icon: BrainCircuit, title: "AI Mortgage Coach", text: "Get plain-English readiness guidance.", screen: "coach" },
+                    { icon: LayoutDashboard, title: "Borrower Dashboard", text: "Track progress and next steps.", screen: "dashboard" },
                   ].map((item) => (
-                   <button
-  key={item.title}
-  onClick={() => {
-    if (item.title === "AI Mortgage Coach") {
-      setScreen("coach");
-    }
-  }}
-  className="flex w-full items-center gap-4 rounded-2xl bg-slate-50 p-5 text-left hover:bg-slate-100"
->
+                    <button
+                      key={item.title}
+                      onClick={() => setScreen(item.screen)}
+                      className="flex w-full items-center gap-4 rounded-2xl bg-slate-50 p-5 text-left hover:bg-slate-100"
+                    >
                       <div className="rounded-xl bg-white p-3 shadow-sm">
                         <item.icon className="h-5 w-5" />
                       </div>
@@ -278,7 +301,7 @@ const [answer, setAnswer] = useState(
 
               <div className="mb-6 rounded-3xl bg-slate-50 p-6">
                 <div className="mb-2 flex justify-between font-bold">
-                  <span>{getReadinessLabel()}</span>
+                  <span>{readinessLabel}</span>
                   <span>{score}/100</span>
                 </div>
                 <Progress value={score} />
@@ -289,7 +312,7 @@ const [answer, setAnswer] = useState(
                   <CheckCircle className="mb-3 h-6 w-6" />
                   <h3 className="mb-2 font-bold">Strengths</h3>
                   <p className="text-sm text-slate-600">
-                    Areas with stronger answers may support a smoother mortgage preparation process.
+                    Stronger answers may support a smoother mortgage preparation process.
                   </p>
                 </div>
 
@@ -311,99 +334,70 @@ const [answer, setAnswer] = useState(
                   <li>• Speak with a licensed mortgage professional before making decisions.</li>
                 </ul>
               </div>
-
-              <Button
-                onClick={() => setScreen("dashboard")}
-                className="mt-6 bg-slate-950 px-6 py-6 text-white"
-              >
-                Go to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
             </CardContent>
           </Card>
         )}
-{screen === "coach" && (
-  <Card className="rounded-3xl">
-    <CardContent className="p-8">
-      <h1 className="mb-2 text-3xl font-extrabold">AI Mortgage Coach</h1>
 
-      <p className="mb-6 text-slate-600">
-        Ask mortgage-readiness questions and receive educational guidance.
-      </p>
+        {screen === "coach" && (
+          <Card className="rounded-3xl">
+            <CardContent className="p-8">
+              <h1 className="mb-2 text-3xl font-extrabold">AI Mortgage Coach</h1>
+              <p className="mb-6 text-slate-600">
+                Ask mortgage-readiness questions and receive educational guidance.
+              </p>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        <div className="space-y-3">
-          {[
-            "How can I improve my credit?",
-            "What documents do I need?",
-            "How does DTI affect approval?",
-            "What hurts underwriting?"
-          ].map((prompt) => (
-            <button
-              key={prompt}
-              className="w-full rounded-2xl bg-slate-100 p-4 text-left text-sm font-semibold hover:bg-slate-200"
-            >
-              {prompt}
-            </button>
-          ))}
-        </div>
+              <div className="grid gap-6 md:grid-cols-3">
+                <div className="space-y-3">
+                  {[
+                    "How can I improve my credit?",
+                    "What documents do I need?",
+                    "How does DTI affect approval?",
+                    "What hurts underwriting?",
+                  ].map((prompt) => (
+                    <button
+                      key={prompt}
+                      onClick={() => {
+                        setQuestion(prompt);
+                        setTimeout(() => askCoach(), 0);
+                      }}
+                      className="w-full rounded-2xl bg-slate-100 p-4 text-left text-sm font-semibold hover:bg-slate-200"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
 
-        <div className="md:col-span-2 rounded-3xl bg-slate-50 p-6">
-          <div className="mb-4 rounded-2xl bg-white p-4 shadow-sm">
-            <p className="text-sm font-bold">Borrower</p>
+                <div className="rounded-3xl bg-slate-50 p-6 md:col-span-2">
+                  <div className="mb-4 rounded-2xl bg-white p-4 shadow-sm">
+                    <p className="text-sm font-bold">Borrower</p>
+                    <p className="text-slate-600">
+                      {question || "What can I do to become mortgage ready?"}
+                    </p>
+                  </div>
 
-            <p className="text-slate-600">
-              What can I do to become mortgage ready?
-            </p>
-          </div>
+                  <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-sm">
+                    <p className="text-sm font-bold">Mortgage Ready Coach</p>
+                    <p className="mt-2 text-sm leading-6">{answer}</p>
+                  </div>
 
-          <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-sm">
-            <p className="text-sm font-bold">Mortgage Ready Coach</p>
+                  <div className="mt-6 flex gap-3">
+                    <input
+                      value={question}
+                      onChange={(e) => setQuestion(e.target.value)}
+                      className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
+                      placeholder="Ask your mortgage question..."
+                    />
 
-            <p className="mt-2 text-sm leading-6">
-              Start by reviewing your credit profile, reducing debt where possible,
-              organizing income and asset documentation, and avoiding major financial
-              changes before applying. A licensed mortgage professional can review
-              your specific situation in more detail.
-            </p>
-          </div>
+                    <Button onClick={askCoach} className="bg-slate-950 text-white">
+                      Ask
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
-        <<div className="flex gap-3">
-  <input
-    value={question}
-    onChange={(e) => setQuestion(e.target.value)}
-    placeholder="Ask your mortgage question..."
-    className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none"
-  />
-
-  <Button
-    onClick={() => {
-      if (question.toLowerCase().includes("credit")) {
-        setAnswer("Improving your credit score may involve reducing credit card balances, making all payments on time, avoiding new debt, and reviewing your credit report for errors.");
-      } else if (question.toLowerCase().includes("dti")) {
-        setAnswer("DTI, or debt-to-income ratio, measures your monthly debt obligations against your gross monthly income. Lower DTI ratios generally improve mortgage approval chances.");
-      } else if (question.toLowerCase().includes("documents")) {
-        setAnswer("Most lenders request pay stubs, W-2s, tax returns, bank statements, identification, and employment verification during the mortgage process.");
-      } else {
-        setAnswer("Mortgage readiness includes stable income, manageable debt, strong credit history, documented assets, and consistent financial behavior.");
-      }
-    }}
-    className="bg-slate-950 text-white"
-  >
-    Ask
-  </Button>
-</div>
-
-<div className="flex gap-3">
-  <input
-    placeholder="Ask your mortgage question..."
-  />
-
-  <Button>
-    Ask
-  </Button>
-</div>
-
-)}
         {screen === "dashboard" && (
           <Card className="rounded-3xl">
             <CardContent className="p-8">
