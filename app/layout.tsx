@@ -1,5 +1,4 @@
 import "./globals.css";
-import type {} from "react";
 
 export const metadata = {
   title: "Mortgage Ready Coach",
