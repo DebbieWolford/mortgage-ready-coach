@@ -146,11 +146,10 @@ const topics: string[] = [];
     
     response =
       "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, ID, employment history, and explanations for large deposits.";
-  } else if (q.includes("underwriting")) {
-  topics.push("underwriting");
+     
 
   response =
-      "Underwriting concerns may include missing documents, large unexplained deposits, new debt, credit changes, income instability, appraisal issues, or property condition concerns.";
+    "Underwriting concerns may include missing documents, large unexplained deposits, new debt, credit changes, income instability, appraisal issues, or property condition concerns.";
   } else if (q.includes("condo")) {
     topics.push("condo");
     
@@ -172,10 +171,11 @@ const topics: string[] = [];
     response =
       "Large deposits often need to be sourced and explained. Lenders may ask for documentation showing where the money came from and whether it must be repaid.";
   } else if (q.includes("employment gap") || q.includes("job gap") || q.includes("gap")) {
-    topics.push("employment");
-    
-    response =
-      "Employment gaps may need to be explained. Lenders often look for stable, continuing income and may ask for documentation about job changes or gaps.";
+  topics.push("employment");
+
+  response =
+    "Employment gaps may need to be explained. Lenders often look for stable, continuing income and may ask for documentation about job changes or gaps.";
+
   } else if (q.includes("preapproval") || q.includes("pre-approval")) {
     topics.push("preapproval");
     
