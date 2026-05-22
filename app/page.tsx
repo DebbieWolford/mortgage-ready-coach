@@ -105,33 +105,48 @@ const [chatHistory, setChatHistory] = useState<
   } else if (q.includes("self-employed") || q.includes("self employed") || q.includes("business owner")) {
     response =
       "Self-employed borrowers are commonly asked for 2 years of tax returns, profit-and-loss information, business bank statements, and stable income documentation.";
-  } else if (q.includes("dti") || q.includes("debt")) {
-    response =
-      "DTI means debt-to-income ratio. It compares monthly debt payments to gross monthly income. Lower DTI ratios generally improve mortgage readiness.";
-  } else if (q.includes("document")) {
-    response =
-      "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, ID, employment history, and explanations for large deposits.";
   } else if (q.includes("fha")) {
     response =
       "FHA loans may allow more flexible credit and down payment options than some conventional loans, but borrowers still need stable income, acceptable debt levels, and required documentation.";
+  } else if (q.includes("va loan") || q.includes(" va ")) {
+    response =
+      "VA loans may offer strong benefits for eligible veterans, service members, and some surviving spouses. Borrowers still need income, credit, VA eligibility, and property approval.";
   } else if (q.includes("conventional")) {
     response =
       "Conventional loans often consider credit score, DTI, down payment, reserves, income stability, and property eligibility. Stronger credit and lower debt can help readiness.";
+  } else if (q.includes("dti") || q.includes("debt")) {
+    response =
+      "DTI means debt-to-income ratio. It compares monthly debt payments to gross monthly income. Lower DTI ratios generally improve mortgage readiness.";
   } else if (q.includes("down payment")) {
     response =
-      "Down payment needs vary by loan type. Some programs allow low down payments, but borrowers should also plan for closing costs, reserves, inspections, and moving expenses.";
+      "Down payment requirements vary by loan type. Some programs allow low down payments, but borrowers should also prepare for closing costs, reserves, inspections, and moving expenses.";
   } else if (q.includes("closing cost")) {
     response =
-      "Closing costs can include lender fees, title fees, appraisal, escrow setup, prepaid taxes, insurance, and recording fees. Buyers should prepare for these in addition to the down payment.";
-  } else if (q.includes("employment gap") || q.includes("gap")) {
+      "Closing costs may include lender fees, title fees, appraisal, escrow setup, prepaid taxes, insurance, and recording fees. Buyers should prepare for these in addition to the down payment.";
+  } else if (q.includes("document")) {
+    response =
+      "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, ID, employment history, and explanations for large deposits.";
+  } else if (q.includes("underwriting")) {
+    response =
+      "Underwriting concerns may include missing documents, large unexplained deposits, new debt, credit changes, income instability, appraisal issues, or property condition concerns.";
+  } else if (q.includes("condo")) {
+    response =
+      "Condo loans may require both borrower approval and condo project review. Lenders may look at HOA finances, insurance, occupancy, litigation, and project eligibility.";
+  } else if (q.includes("bankruptcy")) {
+    response =
+      "A prior bankruptcy does not always prevent mortgage approval, but lenders usually review the discharge date, re-established credit, payment history, and loan program waiting periods.";
+  } else if (q.includes("foreclosure")) {
+    response =
+      "A prior foreclosure may require a waiting period depending on the loan program. Lenders also review re-established credit, income stability, and the reason for the prior hardship.";
+  } else if (q.includes("large deposit")) {
+    response =
+      "Large deposits often need to be sourced and explained. Lenders may ask for documentation showing where the money came from and whether it must be repaid.";
+  } else if (q.includes("employment gap") || q.includes("job gap") || q.includes("gap")) {
     response =
       "Employment gaps may need to be explained. Lenders often look for stable, continuing income and may ask for documentation about job changes or gaps.";
   } else if (q.includes("preapproval") || q.includes("pre-approval")) {
     response =
       "For preapproval, borrowers usually provide income documents, asset statements, credit authorization, ID, employment history, and information about debts and housing goals.";
-  } else if (q.includes("underwriting")) {
-    response =
-      "Underwriting concerns may include missing documents, large unexplained deposits, new debt, credit changes, income instability, appraisal issues, or property condition concerns.";
   }
 
   setChatHistory((previous) => [
