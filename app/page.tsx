@@ -91,39 +91,58 @@ const [chatHistory, setChatHistory] = useState<
   const askCoach = () => {
   if (!question.trim()) return;
 
-  let response =
-    "Start by reviewing your credit profile, reducing debt where possible, organizing income and asset documentation, and avoiding major financial changes before applying.";
+  const q = question.toLowerCase();
 
-  if (question.toLowerCase().includes("credit")) {
+  let response =
+    "Mortgage readiness usually includes stable income, manageable debt, organized documents, acceptable credit history, and enough funds for down payment and closing costs.";
+
+  if (q.includes("credit") || q.includes("score")) {
     response =
-      "Improving credit may include making all payments on time, reducing credit card balances, avoiding new inquiries, and checking your credit report for errors.";
-  } else if (question.toLowerCase().includes("document")) {
+      "Improving credit may include making payments on time, reducing credit card balances, avoiding new credit inquiries, and reviewing your credit report for errors.";
+  } else if (q.includes("w2") || q.includes("w-2") || q.includes("w's")) {
     response =
-      "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, identification, and documentation for large deposits.";
-  } else if (question.toLowerCase().includes("dti")) {
+      "Many lenders review a 2-year employment and income history, often using W-2s, pay stubs, and verification of employment. Some borrowers with less than 2 years may still qualify depending on job history, education, and loan program.";
+  } else if (q.includes("self-employed") || q.includes("self employed") || q.includes("business owner")) {
     response =
-      "Debt-to-income ratio compares monthly debt obligations to gross monthly income. Lower DTI ratios generally improve approval chances.";
-  } else if (question.toLowerCase().includes("underwriting")) {
+      "Self-employed borrowers are commonly asked for 2 years of tax returns, profit-and-loss information, business bank statements, and stable income documentation.";
+  } else if (q.includes("dti") || q.includes("debt")) {
     response =
-      "Underwriting concerns may include late payments, large unexplained deposits, unstable income, high debt levels, or missing documentation.";
+      "DTI means debt-to-income ratio. It compares monthly debt payments to gross monthly income. Lower DTI ratios generally improve mortgage readiness.";
+  } else if (q.includes("document")) {
+    response =
+      "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, ID, employment history, and explanations for large deposits.";
+  } else if (q.includes("fha")) {
+    response =
+      "FHA loans may allow more flexible credit and down payment options than some conventional loans, but borrowers still need stable income, acceptable debt levels, and required documentation.";
+  } else if (q.includes("conventional")) {
+    response =
+      "Conventional loans often consider credit score, DTI, down payment, reserves, income stability, and property eligibility. Stronger credit and lower debt can help readiness.";
+  } else if (q.includes("down payment")) {
+    response =
+      "Down payment needs vary by loan type. Some programs allow low down payments, but borrowers should also plan for closing costs, reserves, inspections, and moving expenses.";
+  } else if (q.includes("closing cost")) {
+    response =
+      "Closing costs can include lender fees, title fees, appraisal, escrow setup, prepaid taxes, insurance, and recording fees. Buyers should prepare for these in addition to the down payment.";
+  } else if (q.includes("employment gap") || q.includes("gap")) {
+    response =
+      "Employment gaps may need to be explained. Lenders often look for stable, continuing income and may ask for documentation about job changes or gaps.";
+  } else if (q.includes("preapproval") || q.includes("pre-approval")) {
+    response =
+      "For preapproval, borrowers usually provide income documents, asset statements, credit authorization, ID, employment history, and information about debts and housing goals.";
+  } else if (q.includes("underwriting")) {
+    response =
+      "Underwriting concerns may include missing documents, large unexplained deposits, new debt, credit changes, income instability, appraisal issues, or property condition concerns.";
   }
 
   setChatHistory((previous) => [
-  ...previous,
-  {
-    role: "Borrower",
-    message: question,
-  },
-  {
-    role: "Mortgage Ready Coach",
-    message: response,
-  },
-]);
+    ...previous,
+    { role: "Borrower", message: question },
+    { role: "Mortgage Ready Coach", message: response },
+  ]);
 
   setAnswer(response);
   setQuestion("");
 };
-
   const questionBlock = (
     label: string,
     field: keyof typeof answers,
