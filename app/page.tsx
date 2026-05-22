@@ -91,33 +91,38 @@ const [chatHistory, setChatHistory] = useState<
       : "Early Preparation Stage";
 
   const askCoach = () => {
-  const q = question.toLowerCase();
+  if (!question.trim()) return;
 
   let response =
-    "Mortgage readiness usually includes stable income, manageable debt, organized documents, acceptable credit history, and enough funds for down payment and closing costs.";
+    "Start by reviewing your credit profile, reducing debt where possible, organizing income and asset documentation, and avoiding major financial changes before applying.";
 
-  if (q.includes("credit")) {
+  if (question.toLowerCase().includes("credit")) {
     response =
-      "Improving credit may include making all payments on time, reducing credit card balances, avoiding new credit inquiries, and checking your credit report for errors.";
-  } else if (q.includes("dti") || q.includes("debt")) {
-    response =
-      "DTI means debt-to-income ratio. It compares monthly debt payments to gross monthly income. Lower debt and stable income may improve mortgage readiness.";
-  } else if (q.includes("document")) {
+      "Improving credit may include making all payments on time, reducing credit card balances, avoiding new inquiries, and checking your credit report for errors.";
+  } else if (question.toLowerCase().includes("document")) {
     response =
       "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, identification, and documentation for large deposits.";
-  } else if (q.includes("underwriting")) {
+  } else if (question.toLowerCase().includes("dti")) {
     response =
-      "Underwriting delays can happen because of missing documents, unexplained deposits, new debt, credit changes, income questions, or property-related issues.";
+      "Debt-to-income ratio compares monthly debt obligations to gross monthly income. Lower DTI ratios generally improve approval chances.";
+  } else if (question.toLowerCase().includes("underwriting")) {
+    response =
+      "Underwriting concerns may include late payments, large unexplained deposits, unstable income, high debt levels, or missing documentation.";
   }
-
-  setAnswer(response);
 
   setChatHistory([
     ...chatHistory,
-    { role: "Borrower", message: question },
-    { role: "Mortgage Ready Coach", message: response },
+    {
+      role: "Borrower",
+      message: question,
+    },
+    {
+      role: "Mortgage Ready Coach",
+      message: response,
+    },
   ]);
 
+  setAnswer(response);
   setQuestion("");
 };
 
