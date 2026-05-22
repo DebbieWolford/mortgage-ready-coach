@@ -41,6 +41,13 @@ const [leadForm, setLeadForm] = useState({
 
 const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [leads, setLeads] = useState<any[]>([]);
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+
+const [leads, setLeads] = useState<any[]>([]);
+
+const [chatHistory, setChatHistory] = useState<
+  { role: "Borrower" | "Mortgage Ready Coach"; message: string }[]
+>([]);
   const updateAnswer = (field: string, value: string) => {
     setAnswers({ ...answers, [field]: value });
   };
@@ -84,30 +91,35 @@ const [leadSubmitted, setLeadSubmitted] = useState(false);
       : "Early Preparation Stage";
 
   const askCoach = () => {
-    const q = question.toLowerCase();
+  const q = question.toLowerCase();
 
-    if (q.includes("credit")) {
-      setAnswer(
-        "Improving credit may include making all payments on time, reducing credit card balances, avoiding new credit inquiries, and checking your credit report for errors."
-      );
-    } else if (q.includes("dti") || q.includes("debt")) {
-      setAnswer(
-        "DTI means debt-to-income ratio. It compares monthly debt payments to gross monthly income. Lower debt and stable income may improve mortgage readiness."
-      );
-    } else if (q.includes("document")) {
-      setAnswer(
-        "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, identification, and documentation for large deposits."
-      );
-    } else if (q.includes("underwriting")) {
-      setAnswer(
-        "Underwriting delays can happen because of missing documents, unexplained deposits, new debt, credit changes, income questions, or property-related issues."
-      );
-    } else {
-      setAnswer(
-        "Mortgage readiness usually includes stable income, manageable debt, organized documents, acceptable credit history, and enough funds for down payment and closing costs."
-      );
-    }
-  };
+  let response =
+    "Mortgage readiness usually includes stable income, manageable debt, organized documents, acceptable credit history, and enough funds for down payment and closing costs.";
+
+  if (q.includes("credit")) {
+    response =
+      "Improving credit may include making all payments on time, reducing credit card balances, avoiding new credit inquiries, and checking your credit report for errors.";
+  } else if (q.includes("dti") || q.includes("debt")) {
+    response =
+      "DTI means debt-to-income ratio. It compares monthly debt payments to gross monthly income. Lower debt and stable income may improve mortgage readiness.";
+  } else if (q.includes("document")) {
+    response =
+      "Common mortgage documents include pay stubs, W-2s, tax returns, bank statements, identification, and documentation for large deposits.";
+  } else if (q.includes("underwriting")) {
+    response =
+      "Underwriting delays can happen because of missing documents, unexplained deposits, new debt, credit changes, income questions, or property-related issues.";
+  }
+
+  setAnswer(response);
+
+  setChatHistory([
+    ...chatHistory,
+    { role: "Borrower", message: question },
+    { role: "Mortgage Ready Coach", message: response },
+  ]);
+
+  setQuestion("");
+};
 
   const questionBlock = (
     label: string,
@@ -376,31 +388,41 @@ const [leadSubmitted, setLeadSubmitted] = useState(false);
                   ))}
                 </div>
 
-                <div className="rounded-3xl bg-slate-50 p-6 md:col-span-2">
-                  <div className="mb-4 rounded-2xl bg-white p-4 shadow-sm">
-                    <p className="text-sm font-bold">Borrower</p>
-                    <p className="text-slate-600">
-                      {question || "What can I do to become mortgage ready?"}
-                    </p>
-                  </div>
+               <div className="rounded-3xl bg-slate-50 p-6 md:col-span-2">
+  <div className="space-y-4">
+    {chatHistory.length === 0 && (
+      <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-sm">
+        <p className="mb-2 font-bold">Mortgage Ready Coach</p>
+        <p className="text-sm leading-6">{answer}</p>
+      </div>
+    )}
 
-                  <div className="rounded-2xl bg-slate-950 p-5 text-white shadow-sm">
-                    <p className="text-sm font-bold">Mortgage Ready Coach</p>
-                    <p className="mt-2 text-sm leading-6">{answer}</p>
-                  </div>
+    {chatHistory.map((chat, index) => (
+      <div
+        key={index}
+        className={`rounded-2xl p-5 ${
+          chat.role === "Borrower" ? "bg-white" : "bg-slate-950 text-white"
+        }`}
+      >
+        <p className="mb-2 font-bold">{chat.role}</p>
+        <p className="text-sm leading-6">{chat.message}</p>
+      </div>
+    ))}
+  </div>
 
-                  <div className="mt-6 flex gap-3">
-                    <input
-                      value={question}
-                      onChange={(e) => setQuestion(e.target.value)}
-                      className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
-                      placeholder="Ask your mortgage question..."
-                    />
+  <div className="mt-6 flex gap-3">
+    <input
+      value={question}
+      onChange={(e) => setQuestion(e.target.value)}
+      className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
+      placeholder="Ask your mortgage question..."
+    />
 
-                    <Button onClick={askCoach} className="bg-slate-950 text-white">
-                      Ask
-                    </Button>
-                  </div>
+    <Button onClick={askCoach} className="bg-slate-950 text-white">
+      Ask
+    </Button>
+  </div>
+</div>
                 </div>
               </div>
             </CardContent>
