@@ -393,18 +393,6 @@ const [answer, setAnswer] = useState(
   </Button>
 </div>
 
-Then find the dark response card that currently contains the hardcoded paragraph and replace ONLY the paragraph text with:
-
-{answer}
-
-Commit the changes and redeploy.
-
-This is confusing: Replace the ENTIRE input/button row with this: -   Are you saying to replace the Input row or the button row?
-
-Replace the whole section that contains BOTH the input field AND the Ask button together.
-
-Right now you probably have something similar to this near the bottom of the Coach section:
-
 <div className="flex gap-3">
   <input
     placeholder="Ask your mortgage question..."
@@ -415,22 +403,6 @@ Right now you probably have something similar to this near the bottom of the Coa
   </Button>
 </div>
 
-Highlight and replace that entire block — from:
-
-<div className="flex gap-3">
-
-all the way down to:
-
-</div>
-
-with the new code I provided.
-
-Do not replace only the input.
-Do not replace only the button.
-Replace the entire container that holds both of them together.
-      </div>
-    </CardContent>
-  </Card>
 )}
         {screen === "dashboard" && (
           <Card className="rounded-3xl">
