@@ -408,37 +408,95 @@ const [leadSubmitted, setLeadSubmitted] = useState(false);
 {screen === "lead" && (
   <Card className="rounded-3xl">
     <CardContent className="p-8">
-      <h1 className="mb-2 text-3xl font-extrabold">Request Mortgage Guidance</h1>
+      <h1 className="mb-2 text-3xl font-extrabold">
+        Request Mortgage Guidance
+      </h1>
+
       <p className="mb-6 text-slate-600">
         Collect borrower contact details for personalized follow-up guidance.
       </p>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        {["Full Name", "Email", "Phone", "State"].map((label) => (
-          <input
-            key={label}
-            className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
-            placeholder={label}
-          />
-        ))}
+      {leadSubmitted && (
+        <div className="mb-6 rounded-2xl bg-green-50 p-4 text-sm font-semibold text-green-800">
+          Thank you! A mortgage professional will contact you soon.
+        </div>
+      )}
 
-        <select className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm md:col-span-2">
-          <option>Loan Goal</option>
-          <option>Buy a home</option>
-          <option>Refinance</option>
-          <option>Improve readiness first</option>
-          <option>Speak with a mortgage professional</option>
+      <div className="grid gap-4 md:grid-cols-2">
+        <input
+          value={leadForm.name}
+          onChange={(e) =>
+            setLeadForm({ ...leadForm, name: e.target.value })
+          }
+          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
+          placeholder="Full Name"
+        />
+
+        <input
+          value={leadForm.email}
+          onChange={(e) =>
+            setLeadForm({ ...leadForm, email: e.target.value })
+          }
+          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
+          placeholder="Email"
+        />
+
+        <input
+          value={leadForm.phone}
+          onChange={(e) =>
+            setLeadForm({ ...leadForm, phone: e.target.value })
+          }
+          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
+          placeholder="Phone"
+        />
+
+        <input
+          value={leadForm.state}
+          onChange={(e) =>
+            setLeadForm({ ...leadForm, state: e.target.value })
+          }
+          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
+         placeholder="State"
+        />
+
+        <select
+          value={leadForm.goal}
+          onChange={(e) =>
+            setLeadForm({ ...leadForm, goal: e.target.value })
+          }
+          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm md:col-span-2"
+        >
+          <option value="">Loan Goal</option>
+          <option value="Buy a home">Buy a home</option>
+          <option value="Refinance">Refinance</option>
+          <option value="Improve readiness first">
+            Improve readiness first
+          </option>
+          <option value="Speak with a mortgage professional">
+            Speak with a mortgage professional
+          </option>
         </select>
       </div>
 
-      <Button   className="mt-6 bg-slate-950 px-6 py-6 text-white"   onClick={() => {     alert("Thank you! A mortgage professional will contact you soon.");
+      <Button
+        className="mt-6 bg-slate-950 px-6 py-6 text-white"
+        onClick={() => {
+          setLeadSubmitted(true);
 
-   }} >
+          setLeadForm({
+            name: "",
+            email: "",
+            phone: "",
+            state: "",
+            goal: "",
+          });
+        }}
+      >
         Request Guidance
       </Button>
     </CardContent>
   </Card>
-)}
+)} 
         {screen === "dashboard" && (
           <Card className="rounded-3xl">
             <CardContent className="p-8">
