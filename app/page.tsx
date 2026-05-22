@@ -31,7 +31,15 @@ export default function MortgageReadyCoach() {
     downPayment: "",
     documents: "",
   });
+const [leadForm, setLeadForm] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  state: "",
+  goal: "",
+});
 
+const [leadSubmitted, setLeadSubmitted] = useState(false);
   const updateAnswer = (field: string, value: string) => {
     setAnswers({ ...answers, [field]: value });
   };
