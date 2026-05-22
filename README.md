@@ -1,6 +1,7 @@
 # Mortgage Ready Coach Starter
 
 This is a deployable Next.js starter project for Mortgage Ready Coach.
+Updated deployment trigger.
 
 ## Local setup
 
