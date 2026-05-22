@@ -110,17 +110,17 @@ const [chatHistory, setChatHistory] = useState<
       "Underwriting concerns may include late payments, large unexplained deposits, unstable income, high debt levels, or missing documentation.";
   }
 
-  setChatHistory([
-    ...chatHistory,
-    {
-      role: "Borrower",
-      message: question,
-    },
-    {
-      role: "Mortgage Ready Coach",
-      message: response,
-    },
-  ]);
+  setChatHistory((previous) => [
+  ...previous,
+  {
+    role: "Borrower",
+    message: question,
+  },
+  {
+    role: "Mortgage Ready Coach",
+    message: response,
+  },
+]);
 
   setAnswer(response);
   setQuestion("");
