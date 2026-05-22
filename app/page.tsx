@@ -42,9 +42,6 @@ const [leadForm, setLeadForm] = useState({
 const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [leads, setLeads] = useState<any[]>([]);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
-
-const [leads, setLeads] = useState<any[]>([]);
-
 const [chatHistory, setChatHistory] = useState<
   { role: "Borrower" | "Mortgage Ready Coach"; message: string }[]
 >([]);
