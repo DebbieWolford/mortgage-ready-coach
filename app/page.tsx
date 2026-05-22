@@ -18,6 +18,10 @@ import {
 
 export default function MortgageReadyCoach() {
   const [screen, setScreen] = useState("landing");
+  const [question, setQuestion] = useState("");
+const [answer, setAnswer] = useState(
+  "Start by reviewing your credit profile, reducing debt where possible, organizing income and asset documentation, and avoiding major financial changes before applying. A licensed mortgage professional can review your specific situation in more detail."
+);
   const [progress, setProgress] = useState(15);
 
   const [answers, setAnswers] = useState({
@@ -363,17 +367,67 @@ export default function MortgageReadyCoach() {
             </p>
           </div>
 
-          <div className="mt-6 flex gap-3">
-            <input
-              className="flex-1 rounded-xl border border-slate-200 px-4 py-3 text-sm"
-              placeholder="Ask your mortgage question..."
-            />
+        <<div className="flex gap-3">
+  <input
+    value={question}
+    onChange={(e) => setQuestion(e.target.value)}
+    placeholder="Ask your mortgage question..."
+    className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none"
+  />
 
-            <Button className="bg-slate-950 text-white">
-              Ask
-            </Button>
-          </div>
-        </div>
+  <Button
+    onClick={() => {
+      if (question.toLowerCase().includes("credit")) {
+        setAnswer("Improving your credit score may involve reducing credit card balances, making all payments on time, avoiding new debt, and reviewing your credit report for errors.");
+      } else if (question.toLowerCase().includes("dti")) {
+        setAnswer("DTI, or debt-to-income ratio, measures your monthly debt obligations against your gross monthly income. Lower DTI ratios generally improve mortgage approval chances.");
+      } else if (question.toLowerCase().includes("documents")) {
+        setAnswer("Most lenders request pay stubs, W-2s, tax returns, bank statements, identification, and employment verification during the mortgage process.");
+      } else {
+        setAnswer("Mortgage readiness includes stable income, manageable debt, strong credit history, documented assets, and consistent financial behavior.");
+      }
+    }}
+    className="bg-slate-950 text-white"
+  >
+    Ask
+  </Button>
+</div>
+
+Then find the dark response card that currently contains the hardcoded paragraph and replace ONLY the paragraph text with:
+
+{answer}
+
+Commit the changes and redeploy.
+
+This is confusing: Replace the ENTIRE input/button row with this: -   Are you saying to replace the Input row or the button row?
+
+Replace the whole section that contains BOTH the input field AND the Ask button together.
+
+Right now you probably have something similar to this near the bottom of the Coach section:
+
+<div className="flex gap-3">
+  <input
+    placeholder="Ask your mortgage question..."
+  />
+
+  <Button>
+    Ask
+  </Button>
+</div>
+
+Highlight and replace that entire block — from:
+
+<div className="flex gap-3">
+
+all the way down to:
+
+</div>
+
+with the new code I provided.
+
+Do not replace only the input.
+Do not replace only the button.
+Replace the entire container that holds both of them together.
       </div>
     </CardContent>
   </Card>
