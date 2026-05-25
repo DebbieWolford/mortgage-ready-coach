@@ -473,22 +473,7 @@ const topics: string[] = [];
               </div>
 
               <div className="mt-6 rounded-2xl bg-slate-950 p-6 text-white">
-  <h3 className="mb-2 text-xl font-bold">Recommended Next Steps</h3>
-
-  <ul className="space-y-2 text-sm">
-    {actionPlan.length > 0 ? (
-      actionPlan.map((item, index) => (
-        <li key={index}>• {item}</li>
-      ))
-    ) : (
-      <>
-        <li>• Continue organizing income, asset, and credit documentation.</li>
-        <li>• Review your monthly debt and housing budget.</li>
-        <li>• Speak with a licensed mortgage professional before making decisions.</li>
-      </>
-    )}
-  </ul>
-</div>
+  
               
             </CardContent>
           </Card>
