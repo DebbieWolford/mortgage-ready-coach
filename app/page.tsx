@@ -594,97 +594,63 @@ const topics: string[] = [];
 )}
 {screen === "lead" && (
   <Card className="rounded-3xl">
-    <CardContent className="p-8">
-      <h1 className="mb-2 text-3xl font-extrabold">
-        Request Mortgage Guidance
-      </h1>
+  <CardContent className="p-8">
+    <h1 className="mb-2 text-3xl font-extrabold">
+      Get Connected With a Mortgage Professional
+    </h1>
 
-      <p className="mb-6 text-slate-600">
-        Collect borrower contact details for personalized follow-up guidance.
-      </p>
+    <p className="mb-6 text-slate-600">
+      Request educational guidance and mortgage readiness support.
+    </p>
 
-      {leadSubmitted && (
-        <div className="mb-6 rounded-2xl bg-green-50 p-4 text-sm font-semibold text-green-800">
-          Thank you! A mortgage professional will contact you soon.
-        </div>
-      )}
+    <div className="grid gap-4 md:grid-cols-2">
+      <input
+        type="text"
+        placeholder="First Name"
+        className="rounded-xl border p-3"
+      />
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <input
-          value={leadForm.name}
-          onChange={(e) =>
-            setLeadForm({ ...leadForm, name: e.target.value })
-          }
-          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
-          placeholder="Full Name"
-        />
+      <input
+        type="text"
+        placeholder="Last Name"
+        className="rounded-xl border p-3"
+      />
 
-        <input
-          value={leadForm.email}
-          onChange={(e) =>
-            setLeadForm({ ...leadForm, email: e.target.value })
-          }
-          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
-          placeholder="Email"
-        />
+      <input
+        type="email"
+        placeholder="Email Address"
+        className="rounded-xl border p-3"
+      />
 
-        <input
-          value={leadForm.phone}
-          onChange={(e) =>
-            setLeadForm({ ...leadForm, phone: e.target.value })
-          }
-          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
-          placeholder="Phone"
-        />
+      <input
+        type="tel"
+        placeholder="Phone Number"
+        className="rounded-xl border p-3"
+      />
 
-        <input
-          value={leadForm.state}
-          onChange={(e) =>
-            setLeadForm({ ...leadForm, state: e.target.value })
-          }
-          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm"
-         placeholder="State"
-        />
+      <input
+        type="text"
+        placeholder="Desired Purchase Price"
+        className="rounded-xl border p-3"
+      />
 
-        <select
-          value={leadForm.goal}
-          onChange={(e) =>
-            setLeadForm({ ...leadForm, goal: e.target.value })
-          }
-          className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm md:col-span-2"
-        >
-          <option value="">Loan Goal</option>
-          <option value="Buy a home">Buy a home</option>
-          <option value="Refinance">Refinance</option>
-          <option value="Improve readiness first">
-            Improve readiness first
-          </option>
-          <option value="Speak with a mortgage professional">
-            Speak with a mortgage professional
-          </option>
-        </select>
-      </div>
+      <input
+        type="text"
+        placeholder="Estimated Credit Score"
+        className="rounded-xl border p-3"
+      />
+    </div>
 
-      <Button
-        className="mt-6 bg-slate-950 px-6 py-6 text-white"
-        onClick={() => {
-  setLeads([...leads, leadForm]);
-  setLeadSubmitted(true);
+    <textarea
+      placeholder="Tell us about your mortgage goals..."
+      className="mt-4 min-h-[120px] w-full rounded-xl border p-3"
+    />
 
-  setLeadForm({
-            name: "",
-            email: "",
-            phone: "",
-            state: "",
-            goal: "",
-          });
-        }}
-      >
-        Request Guidance
-      </Button>
-    </CardContent>
-  </Card>
-)} 
+    <button className="mt-6 rounded-xl bg-slate-950 px-6 py-3 text-white">
+      Request Guidance
+    </button>
+  </CardContent>
+</Card>
         {screen === "dashboard" && (
           <Card className="rounded-3xl">
             <CardContent className="p-8">
