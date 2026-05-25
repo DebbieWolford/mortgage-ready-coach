@@ -618,6 +618,8 @@ onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
       <input
         type="text"
         placeholder="Last Name"
+        value={leadForm.lastName}
+onChange={(e) => setLeadForm({ ...leadForm, lastName: e.target.value })}
         className="rounded-xl border p-3"
       />
 
@@ -640,12 +642,16 @@ onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
       <input
         type="text"
         placeholder="Desired Purchase Price"
+        value={leadForm.purchasePrice}
+onChange={(e) => setLeadForm({ ...leadForm, purchasePrice: e.target.value })}
         className="rounded-xl border p-3"
       />
 
       <input
         type="text"
         placeholder="Estimated Credit Score"
+        value={leadForm.creditScore}
+onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
         className="rounded-xl border p-3"
       />
     </div>
