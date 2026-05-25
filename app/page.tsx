@@ -475,7 +475,7 @@ const topics: string[] = [];
     )}
   </ul>
 </div>
-              </div>
+              
             </CardContent>
           </Card>
         )}
