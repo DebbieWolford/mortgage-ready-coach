@@ -479,11 +479,17 @@ const topics: string[] = [];
                 <div className="rounded-2xl bg-white p-5 shadow-sm">
                   <AlertCircle className="mb-3 h-6 w-6" />
                   <h3 className="mb-2 font-bold">Items to Improve</h3>
-                  <p className="text-sm text-slate-600">
-                    {improvements.length > 0
-  ? improvements.join(" • ")
-  : "Your profile currently shows minimal improvement areas."}
-                  </p>
+                 <div className="text-sm text-slate-600">
+                    {improvements.length > 0 ? (
+  <ul className="space-y-1">
+    {improvements.map((item, index) => (
+      <li key={index}>• {item}</li>
+    ))}
+  </ul>
+) : (
+  "Your profile currently shows minimal improvement areas."
+)}
+                  </div>
                 </div>
               </div>
 
