@@ -651,6 +651,7 @@ const topics: string[] = [];
     </button>
   </CardContent>
 </Card>
+  )}
         {screen === "dashboard" && (
           <Card className="rounded-3xl">
             <CardContent className="p-8">
