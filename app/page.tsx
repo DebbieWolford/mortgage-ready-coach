@@ -33,10 +33,13 @@ export default function MortgageReadyCoach() {
   });
 const [leadForm, setLeadForm] = useState({
   name: "",
-  email: "",
-  phone: "",
-  state: "",
-  goal: "",
+lastName: "",
+email: "",
+phone: "",
+purchasePrice: "",
+creditScore: "",
+state: "",
+goal: "",
 });
 
 const [leadSubmitted, setLeadSubmitted] = useState(false);
@@ -660,12 +663,15 @@ onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
     setLeadSubmitted(true);
 
     setLeadForm({
-      name: "",
-      email: "",
-      phone: "",
-      state: "",
-      goal: "",
-    });
+  name: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  purchasePrice: "",
+  creditScore: "",
+  state: "",
+  goal: "",
+});
   }}
   className="mt-6 rounded-xl bg-slate-950 px-6 py-3 text-white"
 >
