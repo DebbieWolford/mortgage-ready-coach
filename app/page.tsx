@@ -472,8 +472,7 @@ const topics: string[] = [];
                 </div>
               </div>
 
-              <div className="mt-6 rounded-2xl bg-slate-950 p-6 text-white">
-  
+              
               
             </CardContent>
           </Card>
