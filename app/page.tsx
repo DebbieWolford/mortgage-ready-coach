@@ -443,7 +443,17 @@ const topics: string[] = [];
               <div className="mb-6 rounded-3xl bg-slate-50 p-6">
                 <div className="mb-2 flex justify-between font-bold">
                   <span>{readinessLabel}</span>
-                  <span>{score}/100</span>
+                  <span
+  className={
+    score >= 80
+      ? "rounded-full bg-green-100 px-3 py-1 text-green-700"
+      : score >= 60
+      ? "rounded-full bg-yellow-100 px-3 py-1 text-yellow-700"
+      : "rounded-full bg-red-100 px-3 py-1 text-red-700"
+  }
+>
+  {score}/100
+</span>
                 </div>
                <Progress
   value={score}
