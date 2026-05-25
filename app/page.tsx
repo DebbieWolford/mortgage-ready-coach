@@ -739,7 +739,16 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
         <p><strong>Name:</strong> {lead.name} {lead.lastName}</p>
         <p><strong>Email:</strong> {lead.email}</p>
         <p><strong>Phone:</strong> {lead.phone}</p>
-        <p><strong>Purchase Price:</strong> {lead.purchasePrice}</p>
+        <p>
+  <strong>Purchase Price:</strong>{" "}
+  {lead.purchasePrice
+    ? Number(lead.purchasePrice).toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      })
+    : ""}
+</p>
         <p><strong>Credit Score:</strong> {lead.creditScore}</p>
         <p><strong>Goals:</strong> {lead.goal}</p>
       </div>
