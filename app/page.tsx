@@ -603,6 +603,11 @@ const topics: string[] = [];
 {screen === "lead" && (
   <Card className="rounded-3xl">
   <CardContent className="p-8">
+    {leadSubmitted && (
+  <div className="mb-4 rounded-xl bg-green-100 p-4 text-green-700">
+    Thank you! A mortgage professional will contact you soon.
+  </div>
+)}
     <h1 className="mb-2 text-3xl font-extrabold">
       Get Connected With a Mortgage Professional
     </h1>
