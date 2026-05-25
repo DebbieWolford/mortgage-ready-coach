@@ -470,10 +470,16 @@ const topics: string[] = [];
                   <CheckCircle className="mb-3 h-6 w-6" />
                   <h3 className="mb-2 font-bold">Strengths</h3>
                   <p className="text-sm text-slate-600">
-                    {strengths.length > 0
-  ? strengths.join(" • ")
-  : "Continue building strong mortgage readiness habits."}
-                  </p>
+                    {strengths.length > 0 ? (
+  <ul className="space-y-1">
+    {strengths.map((item, index) => (
+      <li key={index}>• {item}</li>
+    ))}
+  </ul>
+) : (
+  "Continue building strong mortgage readiness habits."
+)}
+                  </div>
                 </div>
 
                 <div className="rounded-2xl bg-white p-5 shadow-sm">
