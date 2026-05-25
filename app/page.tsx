@@ -329,6 +329,11 @@ const topics: string[] = [];
             <div className="grid gap-6 md:grid-cols-2">
               <Card className="rounded-3xl">
                 <CardContent className="p-8">
+                  {leadSubmitted && (
+  <div className="mb-4 rounded-xl bg-green-100 p-4 text-green-700">
+    Thank you! A mortgage professional will contact you soon.
+  </div>
+)}
                   <div className="mb-5 inline-flex rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold">
                     <ShieldCheck className="mr-2 h-4 w-4" />
                     Educational Mortgage Guidance
