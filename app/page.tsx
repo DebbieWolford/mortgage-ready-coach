@@ -445,7 +445,16 @@ const topics: string[] = [];
                   <span>{readinessLabel}</span>
                   <span>{score}/100</span>
                 </div>
-                <Progress value={score} />
+               <Progress
+  value={score}
+  className={
+    score >= 80
+      ? "[&>div]:bg-green-600"
+      : score >= 60
+      ? "[&>div]:bg-yellow-500"
+      : "[&>div]:bg-red-500"
+  }
+/>
               </div>
 {actionPlan.length > 0 && (
   <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm">
