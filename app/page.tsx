@@ -76,7 +76,34 @@ const [chatHistory, setChatHistory] = useState<
   };
 
   const score = calculateScore();
-  
+  const actionPlan: string[] = [];
+
+if (answers.credit === "low") {
+  actionPlan.push("Reduce credit card balances.");
+  actionPlan.push("Avoid opening new credit accounts.");
+  actionPlan.push("Make all payments on time.");
+}
+
+if (answers.dti === "high") {
+  actionPlan.push("Pay down monthly debt obligations.");
+  actionPlan.push("Avoid financing large purchases.");
+}
+
+if (answers.downPayment === "none") {
+  actionPlan.push("Build savings for down payment and closing costs.");
+}
+
+if (answers.documents === "notready") {
+  actionPlan.push("Organize income and asset documentation.");
+}
+
+if (answers.employment === "selfemployed") {
+  actionPlan.push("Prepare 2 years of tax returns and business documents.");
+}
+
+if (score >= 80) {
+  actionPlan.push("Consider speaking with a lender for preapproval.");
+}
 
 
   const readinessLabel =
@@ -398,7 +425,24 @@ const topics: string[] = [];
                 </div>
                 <Progress value={score} />
               </div>
+{actionPlan.length > 0 && (
+  <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm">
+    <h3 className="mb-3 text-lg font-bold">
+      Personalized Action Plan
+    </h3>
 
+    <ul className="space-y-2 text-sm text-slate-700">
+      {actionPlan.map((item, index) => (
+        <li
+          key={index}
+          className="rounded-lg bg-slate-50 p-3"
+        >
+          • {item}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="rounded-2xl bg-white p-5 shadow-sm">
                   <CheckCircle className="mb-3 h-6 w-6" />
