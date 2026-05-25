@@ -99,6 +99,21 @@ if (answers.dti === "high") {
 if (answers.dti === "low") {
   strengths.push("Manageable debt levels.");
 }
+  if (answers.documents === "ready") {
+  strengths.push("Organized mortgage documentation.");
+}
+
+if (answers.documents === "notready") {
+  improvements.push("Documentation may need preparation.");
+}
+
+if (answers.downPayment === "strong") {
+  strengths.push("Strong down payment preparation.");
+}
+
+if (answers.downPayment === "none") {
+  improvements.push("Limited funds for down payment and closing costs.");
+}
 if (answers.downPayment === "none") {
   actionPlan.push("Build savings for down payment and closing costs.");
 }
