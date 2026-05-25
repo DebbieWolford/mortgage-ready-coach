@@ -738,7 +738,15 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
       >
         <p><strong>Name:</strong> {lead.name} {lead.lastName}</p>
         <p><strong>Email:</strong> {lead.email}</p>
-        <p><strong>Phone:</strong> {lead.phone}</p>
+        <p>
+  <strong>Phone:</strong>{" "}
+  {lead.phone
+    ? lead.phone.replace(
+        /(\d{3})(\d{3})(\d{4})/,
+        "($1) $2-$3"
+      )
+    : ""}
+</p>
         <p>
   <strong>Purchase Price:</strong>{" "}
   {lead.purchasePrice
