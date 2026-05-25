@@ -77,18 +77,28 @@ const [chatHistory, setChatHistory] = useState<
 
   const score = calculateScore();
   const actionPlan: string[] = [];
-
+const strengths: string[] = [];
+const improvements: string[] = [];
 if (answers.credit === "low") {
   actionPlan.push("Reduce credit card balances.");
   actionPlan.push("Avoid opening new credit accounts.");
   actionPlan.push("Make all payments on time.");
+
+  improvements.push("Credit profile may need improvement.");
+}
+
+if (answers.credit === "high") {
+  strengths.push("Strong credit profile.");
 }
 
 if (answers.dti === "high") {
   actionPlan.push("Pay down monthly debt obligations.");
   actionPlan.push("Avoid financing large purchases.");
+  improvements.push("High debt-to-income ratio.");
 }
-
+if (answers.dti === "low") {
+  strengths.push("Manageable debt levels.");
+}
 if (answers.downPayment === "none") {
   actionPlan.push("Build savings for down payment and closing costs.");
 }
@@ -445,7 +455,9 @@ const topics: string[] = [];
                   <CheckCircle className="mb-3 h-6 w-6" />
                   <h3 className="mb-2 font-bold">Strengths</h3>
                   <p className="text-sm text-slate-600">
-                    Stronger answers may support a smoother mortgage preparation process.
+                    {strengths.length > 0
+  ? strengths.join(" • ")
+  : "Continue building strong mortgage readiness habits."}
                   </p>
                 </div>
 
@@ -453,7 +465,9 @@ const topics: string[] = [];
                   <AlertCircle className="mb-3 h-6 w-6" />
                   <h3 className="mb-2 font-bold">Items to Improve</h3>
                   <p className="text-sm text-slate-600">
-                    Focus on credit, debt, savings, income stability, and document organization.
+                    {improvements.length > 0
+  ? improvements.join(" • ")
+  : "Your profile currently shows minimal improvement areas."}
                   </p>
                 </div>
               </div>
