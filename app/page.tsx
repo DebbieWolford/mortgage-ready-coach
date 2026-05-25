@@ -97,9 +97,6 @@ if (answers.documents === "notready") {
   actionPlan.push("Organize income and asset documentation.");
 }
 
-if (answers.employment === "selfemployed") {
-  actionPlan.push("Prepare 2 years of tax returns and business documents.");
-}
 
 if (score >= 80) {
   actionPlan.push("Consider speaking with a lender for preapproval.");
