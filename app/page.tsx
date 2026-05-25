@@ -607,6 +607,8 @@ const topics: string[] = [];
       <input
         type="text"
         placeholder="First Name"
+        value={leadForm.name}
+onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
         className="rounded-xl border p-3"
       />
 
@@ -619,12 +621,16 @@ const topics: string[] = [];
       <input
         type="email"
         placeholder="Email Address"
+        value={leadForm.email}
+onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
         className="rounded-xl border p-3"
       />
 
       <input
         type="tel"
         placeholder="Phone Number"
+        value={leadForm.phone}
+onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
         className="rounded-xl border p-3"
       />
 
@@ -643,10 +649,26 @@ const topics: string[] = [];
 
     <textarea
       placeholder="Tell us about your mortgage goals..."
+      value={leadForm.goal}
+  onChange={(e) => setLeadForm({ ...leadForm, goal: e.target.value })}
       className="mt-4 min-h-[120px] w-full rounded-xl border p-3"
     />
 
-    <button className="mt-6 rounded-xl bg-slate-950 px-6 py-3 text-white">
+    <button
+  onClick={() => {
+    setLeads([...leads, leadForm]);
+    setLeadSubmitted(true);
+
+    setLeadForm({
+      name: "",
+      email: "",
+      phone: "",
+      state: "",
+      goal: "",
+    });
+  }}
+  className="mt-6 rounded-xl bg-slate-950 px-6 py-3 text-white"
+>
       Request Guidance
     </button>
   </CardContent>
