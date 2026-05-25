@@ -725,22 +725,25 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
                   <p className="mt-2 text-sm text-slate-600">
                     Review readiness gaps and prepare documents.
                   </p>
-                  <div className="rounded-2xl bg-slate-50 p-5">
+                 <div className="rounded-2xl bg-slate-50 p-5 md:col-span-3">
   <h3 className="font-bold">Captured Leads</h3>
   <p className="mt-2 text-3xl font-extrabold">{leads.length}</p>
-                    {leads.map((lead, index) => (
-  <div
-    key={index}
-    className="mt-4 rounded-xl border bg-white p-3 text-sm"
-  >
-    <p><strong>Name:</strong> {lead.name} {lead.lastName}</p>
-    <p><strong>Email:</strong> {lead.email}</p>
-    <p><strong>Phone:</strong> {lead.phone}</p>
-    <p><strong>Purchase Price:</strong> {lead.purchasePrice}</p>
-    <p><strong>Credit Score:</strong> {lead.creditScore}</p>
-    <p><strong>Goals:</strong> {lead.goal}</p>
+
+  <div className="mt-4 grid gap-4 md:grid-cols-2">
+    {leads.map((lead, index) => (
+      <div
+        key={index}
+        className="rounded-xl border bg-white p-4 text-sm shadow-sm"
+      >
+        <p><strong>Name:</strong> {lead.name} {lead.lastName}</p>
+        <p><strong>Email:</strong> {lead.email}</p>
+        <p><strong>Phone:</strong> {lead.phone}</p>
+        <p><strong>Purchase Price:</strong> {lead.purchasePrice}</p>
+        <p><strong>Credit Score:</strong> {lead.creditScore}</p>
+        <p><strong>Goals:</strong> {lead.goal}</p>
+      </div>
+    ))}
   </div>
-))}
 </div>
                 </div>
               </div>
