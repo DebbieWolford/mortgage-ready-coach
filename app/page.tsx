@@ -725,6 +725,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
                   <p className="mt-2 text-sm text-slate-600">
                     Review readiness gaps and prepare documents.
                   </p>
+                  </div>
                  <div className="rounded-2xl bg-slate-50 p-5 md:col-span-3">
   <h3 className="font-bold">Captured Leads</h3>
   <p className="mt-2 text-3xl font-extrabold">{leads.length}</p>
