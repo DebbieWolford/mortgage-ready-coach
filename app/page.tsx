@@ -675,7 +675,13 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 
     <button
   onClick={() => {
-    setLeads([...leads, leadForm]);
+    setLeads([
+  ...leads,
+  {
+    ...leadForm,
+    submittedAt: new Date().toLocaleString(),
+  },
+]);
     setLeadSubmitted(true);
 
     setLeadForm({
@@ -759,6 +765,9 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </p>
         <p><strong>Credit Score:</strong> {lead.creditScore}</p>
         <p><strong>Goals:</strong> {lead.goal}</p>
+        <p className="mt-2 text-xs text-slate-500">
+  Submitted: {lead.submittedAt}
+</p>
       </div>
     ))}
   </div>
