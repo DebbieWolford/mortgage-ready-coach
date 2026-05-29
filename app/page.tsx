@@ -15,6 +15,7 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
+import { createClient } from "@supabase/supabase-js";
 
 export default function MortgageReadyCoach() {
   const [screen, setScreen] = useState("landing");
