@@ -52,6 +52,33 @@ const [leads, setLeads] = useState<any[]>([]);
 const [chatHistory, setChatHistory] = useState<
   { role: "Borrower" | "Mortgage Ready Coach"; message: string }[]
 >([]);
+  useEffect(() => {
+  const loadLeads = async () => {
+    const { data, error } = await supabase
+      .from("leads")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      setLeads(
+        data.map((lead) => ({
+          name: lead.name || "",
+          lastName: lead.lastname || "",
+          email: lead.email || "",
+          phone: lead.phone || "",
+          purchasePrice: lead.purchaseprice || "",
+          creditScore: lead.creditscore || "",
+          goal: lead.goal || "",
+          submittedAt: lead.created_at
+            ? new Date(lead.created_at).toLocaleString()
+            : "",
+        }))
+      );
+    }
+  };
+
+  loadLeads();
+}, []);
   const updateAnswer = (field: string, value: string) => {
     setAnswers({ ...answers, [field]: value });
   };
