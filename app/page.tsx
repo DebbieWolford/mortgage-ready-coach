@@ -679,7 +679,18 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     />
 
     <button
-  onClick={() => {
+  onClick={async () => {
+   await supabase.from("leads").insert([
+  {
+    name: leadForm.name,
+    lastname: leadForm.lastName,
+    email: leadForm.email,
+    phone: leadForm.phone,
+    purchaseprice: leadForm.purchasePrice,
+    creditscore: leadForm.creditScore,
+    goal: leadForm.goal,
+  },
+]); 
     setLeads([
   ...leads,
   {
