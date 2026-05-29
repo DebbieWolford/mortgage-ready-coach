@@ -12,6 +12,7 @@
     "class-variance-authority": "latest",
     "clsx": "latest",
     "framer-motion": "latest",
+    "@supabase/supabase-js": "^2.50.0",
     "lucide-react": "latest",
     "next": "15.5.9",
     "react": "19.1.0",
