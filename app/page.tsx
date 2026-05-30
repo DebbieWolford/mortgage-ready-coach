@@ -53,6 +53,8 @@ const [leadSubmitted, setLeadSubmitted] = useState(false);
 const [leads, setLeads] = useState<any[]>([]);
 const [leadSearch, setLeadSearch] = useState("");
   const [leadSort, setLeadSort] = useState("newest");
+  const [editingLeadId, setEditingLeadId] = useState<number | null>(null);
+const [editLeadForm, setEditLeadForm] = useState<any>({});
 const [chatHistory, setChatHistory] = useState<
   { role: "Borrower" | "Mortgage Ready Coach"; message: string }[]
 >([]);
@@ -941,6 +943,16 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
           <p className="mt-2 text-xs text-slate-500">
   Submitted: {lead.submittedAt}
 </p>
+
+<button
+  onClick={() => {
+    setEditingLeadId(lead.id);
+    setEditLeadForm(lead);
+  }}
+  className="mt-3 mr-2 rounded-lg bg-slate-900 px-3 py-2 text-white hover:bg-slate-700"
+>
+  Edit Lead
+</button>
 
 <button
   onClick={async () => {
