@@ -71,6 +71,7 @@ const [chatHistory, setChatHistory] = useState<
           purchasePrice: lead.purchaseprice || "",
           creditScore: lead.creditscore || "",
           goal: lead.goal || "",
+          referralSource: lead.referralsource || "",
           status: lead.status || "New Lead",
           submittedAt: lead.created_at
             ? new Date(lead.created_at).toLocaleString()
@@ -856,6 +857,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </p>
         <p><strong>Credit Score:</strong> {lead.creditScore}</p>
         <p><strong>Goals:</strong> {lead.goal}</p>
+        <p><strong>Referral Source:</strong> {lead.referralSource || "Not Provided"}</p>
         <div className="mt-2">
   <label className="mr-2 text-sm font-bold">Status:</label>
   <select
