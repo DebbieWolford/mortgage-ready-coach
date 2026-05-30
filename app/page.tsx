@@ -837,7 +837,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </select>
 </div>
         <div className="mt-3 inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
-  New Lead
+  {lead.status || "New Lead"}
 </div>
         <p className="mt-2 text-xs text-slate-500">
   Submitted: {lead.submittedAt}
