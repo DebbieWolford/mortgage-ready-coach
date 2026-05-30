@@ -836,7 +836,21 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     <option>Closed</option>
   </select>
 </div>
-        <div className="mt-3 inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+        <div
+  className={`mt-3 inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+    lead.status === "Closed"
+      ? "bg-green-200 text-green-800"
+      : lead.status === "Pre-Approved"
+      ? "bg-green-100 text-green-700"
+      : lead.status === "Application Started"
+      ? "bg-orange-100 text-orange-700"
+      : lead.status === "Contacted"
+      ? "bg-yellow-100 text-yellow-700"
+      : "bg-blue-100 text-blue-700"
+  }`}
+>
+  {lead.status || "New Lead"}
+</div>
   {lead.status || "New Lead"}
 </div>
         <p className="mt-2 text-xs text-slate-500">
