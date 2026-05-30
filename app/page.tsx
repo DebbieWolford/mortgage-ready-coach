@@ -864,7 +864,22 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
       .toLowerCase()
       .includes(leadSearch.toLowerCase())
   )
-  .map((lead, index) => (
+  .sort((a, b) => {
+  if (leadSort === "oldest") {
+    return new Date(a.submittedAt).getTime() - new Date(b.submittedAt).getTime();
+  }
+
+  if (leadSort === "highest") {
+    return Number(b.purchasePrice || 0) - Number(a.purchasePrice || 0);
+  }
+
+  if (leadSort === "lowest") {
+    return Number(a.purchasePrice || 0) - Number(b.purchasePrice || 0);
+  }
+
+  return new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime();
+})
+.map((lead, index) => (
       <div
         key={index}
         className="rounded-xl border bg-white p-4 text-sm shadow-sm"
