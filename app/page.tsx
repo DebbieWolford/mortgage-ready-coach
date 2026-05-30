@@ -789,6 +789,16 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
                     Review readiness gaps and prepare documents.
                   </p>
                   </div>
+                <div className="mt-6 grid gap-4 md:grid-cols-5">
+  {["New Lead", "Contacted", "Application Started", "Pre-Approved", "Closed"].map((status) => (
+    <div key={status} className="rounded-2xl bg-slate-50 p-4">
+      <h3 className="text-sm font-bold">{status}</h3>
+      <p className="mt-2 text-2xl font-extrabold">
+        {leads.filter((lead) => (lead.status || "New Lead") === status).length}
+      </p>
+    </div>
+  ))}
+</div>
                  <div className="rounded-2xl bg-slate-50 p-5 md:col-span-3">
   <h3 className="font-bold">Captured Leads</h3>
   <p className="mt-2 text-3xl font-extrabold">{leads.length}</p>
