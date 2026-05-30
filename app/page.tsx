@@ -811,7 +811,15 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   />
 </div>
   <h3 className="font-bold">Captured Leads</h3>
-  <p className="mt-2 text-3xl font-extrabold">{leads.length}</p>
+  <p className="mt-2 text-3xl font-extrabold">
+{
+  leads.filter((lead) =>
+    `${lead.name} ${lead.lastName} ${lead.email} ${lead.phone}`
+      .toLowerCase()
+      .includes(leadSearch.toLowerCase())
+  ).length
+}
+</p>
 
   <div className="mt-4 grid gap-4 md:grid-cols-2">
     {leads
