@@ -62,6 +62,7 @@ const [chatHistory, setChatHistory] = useState<
     if (!error && data) {
       setLeads(
         data.map((lead) => ({
+          id: lead.id,
           name: lead.name || "",
           lastName: lead.lastname || "",
           email: lead.email || "",
@@ -69,6 +70,7 @@ const [chatHistory, setChatHistory] = useState<
           purchasePrice: lead.purchaseprice || "",
           creditScore: lead.creditscore || "",
           goal: lead.goal || "",
+          status: lead.status || "New Lead",
           submittedAt: lead.created_at
             ? new Date(lead.created_at).toLocaleString()
             : "",
