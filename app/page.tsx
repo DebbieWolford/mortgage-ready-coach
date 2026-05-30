@@ -882,28 +882,33 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 <div className="mt-4 flex gap-3">
   <button
     onClick={async () => {
-      await supabase
-        .from("leads")
-        .update({
-          name: editLeadForm.name,
-          lastname: editLeadForm.lastName,
-          email: editLeadForm.email,
-          phone: editLeadForm.phone,
-          referralsource: editLeadForm.referralSource,
-          creditscore: editLeadForm.creditScore,
-          notes: editLeadForm.notes,
-        })
-        .eq("id", editingLeadId);
+  const { error } = await supabase
+    .from("leads")
+    .update({
+      name: editLeadForm.name,
+      lastname: editLeadForm.lastName,
+      email: editLeadForm.email,
+      phone: editLeadForm.phone,
+      referralsource: editLeadForm.referralSource || "",
+      creditscore: editLeadForm.creditScore,
+      notes: editLeadForm.notes || "",
+    })
+    .eq("id", editingLeadId);
 
-      setLeads(
-        leads.map((lead) =>
-          lead.id === editingLeadId ? { ...lead, ...editLeadForm } : lead
-        )
-      );
+  if (error) {
+    alert("Update failed: " + error.message);
+    return;
+  }
 
-      setEditingLeadId(null);
-      setEditLeadForm({});
-    }}
+  setLeads(
+    leads.map((lead) =>
+      lead.id === editingLeadId ? { ...lead, ...editLeadForm } : lead
+    )
+  );
+
+  setEditingLeadId(null);
+  setEditLeadForm({});
+}}
     className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
   >
     Save Changes
