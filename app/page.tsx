@@ -808,6 +808,9 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </p>
         <p><strong>Credit Score:</strong> {lead.creditScore}</p>
         <p><strong>Goals:</strong> {lead.goal}</p>
+        <p>
+  <strong>Status:</strong> {lead.status || "New Lead"}
+</p>
         <div className="mt-3 inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
   New Lead
 </div>
