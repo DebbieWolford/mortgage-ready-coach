@@ -941,6 +941,20 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
           <p className="mt-2 text-xs text-slate-500">
   Submitted: {lead.submittedAt}
 </p>
+
+<button
+  onClick={async () => {
+    await supabase
+      .from("leads")
+      .delete()
+      .eq("id", lead.id);
+
+    setLeads(leads.filter((l) => l.id !== lead.id));
+  }}
+  className="mt-3 rounded-lg bg-red-600 px-3 py-2 text-white hover:bg-red-700"
+>
+  Delete Lead
+</button>    
       </div>
     ))}
   </div>
