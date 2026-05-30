@@ -794,7 +794,14 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
               <p className="mb-6 text-slate-600">
                 Track readiness, documents, leads, and next steps.
               </p>
-
+{editingLeadId && (
+  <div className="mb-6 rounded-2xl border bg-white p-4 shadow-sm">
+    <h2 className="mb-4 text-xl font-bold">Edit Lead</h2>
+    <p className="text-sm text-slate-600">
+      Editing mode is active. Save form fields will be added next.
+    </p>
+  </div>
+)}
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="rounded-2xl bg-slate-50 p-5">
                   <h3 className="font-bold">Readiness Score</h3>
