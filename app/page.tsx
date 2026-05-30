@@ -795,7 +795,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
                 Track readiness, documents, leads, and next steps.
               </p>
 {editingLeadId && (
- className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+ 
   <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl">
     <h2 className="mb-4 text-xl font-bold">Edit Lead</h2>
 
