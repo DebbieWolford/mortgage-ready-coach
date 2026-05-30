@@ -81,6 +81,18 @@ const [chatHistory, setChatHistory] = useState<
 
   loadLeads();
 }, []);
+  const updateLeadStatus = async (leadId: number, newStatus: string) => {
+  setLeads(
+    leads.map((lead) =>
+      lead.id === leadId ? { ...lead, status: newStatus } : lead
+    )
+  );
+
+  await supabase
+    .from("leads")
+    .update({ status: newStatus })
+    .eq("id", leadId);
+};
   const updateAnswer = (field: string, value: string) => {
     setAnswers({ ...answers, [field]: value });
   };
