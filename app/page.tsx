@@ -49,6 +49,7 @@ goal: "",
 
 const [leadSubmitted, setLeadSubmitted] = useState(false);
 const [leads, setLeads] = useState<any[]>([]);
+const [leadSearch, setLeadSearch] = useState("");
 const [chatHistory, setChatHistory] = useState<
   { role: "Borrower" | "Mortgage Ready Coach"; message: string }[]
 >([]);
@@ -800,11 +801,26 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   ))}
 </div>
                  <div className="rounded-2xl bg-slate-50 p-5 md:col-span-3">
+                   <div className="mb-4">
+  <input
+    type="text"
+    placeholder="Search by name, email, or phone..."
+    value={leadSearch}
+    onChange={(e) => setLeadSearch(e.target.value)}
+    className="w-full rounded-lg border px-3 py-2"
+  />
+</div>
   <h3 className="font-bold">Captured Leads</h3>
   <p className="mt-2 text-3xl font-extrabold">{leads.length}</p>
 
   <div className="mt-4 grid gap-4 md:grid-cols-2">
-    {leads.map((lead, index) => (
+    {leads
+  .filter((lead) =>
+    `${lead.name} ${lead.lastName} ${lead.email} ${lead.phone}`
+      .toLowerCase()
+      .includes(leadSearch.toLowerCase())
+  )
+  .map((lead, index) => (
       <div
         key={index}
         className="rounded-xl border bg-white p-4 text-sm shadow-sm"
