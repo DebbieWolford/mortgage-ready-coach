@@ -46,6 +46,7 @@ purchasePrice: "",
 creditScore: "",
 state: "",
 goal: "",
+  notes: "",
 });
 
 const [leadSubmitted, setLeadSubmitted] = useState(false);
@@ -730,7 +731,14 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   onChange={(e) => setLeadForm({ ...leadForm, goal: e.target.value })}
       className="mt-4 min-h-[120px] w-full rounded-xl border p-3"
     />
-
+<textarea
+  placeholder="Lead Notes..."
+  value={leadForm.notes || ""}
+  onChange={(e) =>
+    setLeadForm({ ...leadForm, notes: e.target.value })
+  }
+  className="mt-4 min-h-[120px] w-full rounded-xl border p-3"
+/>
     <button
   onClick={async () => {
    await supabase.from("leads").insert([
@@ -743,6 +751,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     creditscore: leadForm.creditScore,
     goal: leadForm.goal,
     referralsource: leadForm.referralSource,
+    notes: leadForm.notes,
   },
 ]); 
   setLeads([
@@ -763,6 +772,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   creditScore: "",
   state: "",
   goal: "",
+      notes: "",
       referralSource: "",
 });
   }}
