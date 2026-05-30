@@ -797,9 +797,89 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 {editingLeadId && (
   <div className="mb-6 rounded-2xl border bg-white p-4 shadow-sm">
     <h2 className="mb-4 text-xl font-bold">Edit Lead</h2>
-    <p className="text-sm text-slate-600">
-      Editing mode is active. Save form fields will be added next.
-    </p>
+
+    <div className="grid gap-3 md:grid-cols-2">
+
+      <input
+        type="text"
+        placeholder="First Name"
+        value={editLeadForm.name || ""}
+        onChange={(e) =>
+          setEditLeadForm({ ...editLeadForm, name: e.target.value })
+        }
+        className="rounded-lg border p-2"
+      />
+
+      <input
+        type="text"
+        placeholder="Last Name"
+        value={editLeadForm.lastName || ""}
+        onChange={(e) =>
+          setEditLeadForm({ ...editLeadForm, lastName: e.target.value })
+        }
+        className="rounded-lg border p-2"
+      />
+
+      <input
+        type="email"
+        placeholder="Email"
+        value={editLeadForm.email || ""}
+        onChange={(e) =>
+          setEditLeadForm({ ...editLeadForm, email: e.target.value })
+        }
+        className="rounded-lg border p-2"
+      />
+
+      <input
+        type="text"
+        placeholder="Phone"
+        value={editLeadForm.phone || ""}
+        onChange={(e) =>
+          setEditLeadForm({ ...editLeadForm, phone: e.target.value })
+        }
+        className="rounded-lg border p-2"
+      />
+
+      <input
+        type="text"
+        placeholder="Referral Source"
+        value={editLeadForm.referralSource || ""}
+        onChange={(e) =>
+          setEditLeadForm({
+            ...editLeadForm,
+            referralSource: e.target.value,
+          })
+        }
+        className="rounded-lg border p-2"
+      />
+
+      <input
+        type="text"
+        placeholder="Credit Score"
+        value={editLeadForm.creditScore || ""}
+        onChange={(e) =>
+          setEditLeadForm({
+            ...editLeadForm,
+            creditScore: e.target.value,
+          })
+        }
+        className="rounded-lg border p-2"
+      />
+
+    </div>
+
+    <textarea
+      placeholder="Notes"
+      value={editLeadForm.notes || ""}
+      onChange={(e) =>
+        setEditLeadForm({
+          ...editLeadForm,
+          notes: e.target.value,
+        })
+      }
+      className="mt-3 w-full rounded-lg border p-2"
+    />
+
   </div>
 )}
               <div className="grid gap-4 md:grid-cols-3">
