@@ -718,13 +718,13 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     goal: leadForm.goal,
   },
 ]); 
-    setLeads([
-  ...leads,
+  setLeads([
   {
     ...leadForm,
     submittedAt: new Date().toLocaleString(),
   },
-]);
+  ...leads,
+]);  
     setLeadSubmitted(true);
 
     setLeadForm({
