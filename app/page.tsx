@@ -808,9 +808,19 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </p>
         <p><strong>Credit Score:</strong> {lead.creditScore}</p>
         <p><strong>Goals:</strong> {lead.goal}</p>
-        <p>
-  <strong>Status:</strong> {lead.status || "New Lead"}
-</p>
+        <div className="mt-2">
+  <label className="mr-2 text-sm font-bold">Status:</label>
+  <select
+    value={lead.status || "New Lead"}
+    className="rounded-lg border px-2 py-1 text-sm"
+  >
+    <option>New Lead</option>
+    <option>Contacted</option>
+    <option>Application Started</option>
+    <option>Pre-Approved</option>
+    <option>Closed</option>
+  </select>
+</div>
         <div className="mt-3 inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
   New Lead
 </div>
