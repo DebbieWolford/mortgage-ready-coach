@@ -42,6 +42,7 @@ lastName: "",
 email: "",
 phone: "",
 purchasePrice: "",
+  referralSource: "",
 creditScore: "",
 state: "",
 goal: "",
@@ -704,6 +705,15 @@ onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
 onChange={(e) => setLeadForm({ ...leadForm, purchasePrice: e.target.value })}
         className="rounded-xl border p-3"
       />
+      <input
+  type="text"
+  placeholder="Referral Source"
+  value={leadForm.referralSource || ""}
+  onChange={(e) =>
+    setLeadForm({ ...leadForm, referralSource: e.target.value })
+  }
+  className="rounded-xl border p-3"
+/>
 
       <input
         type="text"
@@ -732,6 +742,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     purchaseprice: leadForm.purchasePrice,
     creditscore: leadForm.creditScore,
     goal: leadForm.goal,
+    referralsource: leadForm.referralSource,
   },
 ]); 
   setLeads([
@@ -752,6 +763,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   creditScore: "",
   state: "",
   goal: "",
+      referralSource: "",
 });
   }}
   className="mt-6 rounded-xl bg-slate-950 px-6 py-3 text-white"
