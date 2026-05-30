@@ -848,12 +848,10 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
       ? "bg-yellow-100 text-yellow-700"
       : "bg-blue-100 text-blue-700"
   }`}
->
-  {lead.status || "New Lead"}
+          >
+          {lead.status || "New Lead"}
 </div>
-  {lead.status || "New Lead"}
-</div>
-        <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-xs text-slate-500">
   Submitted: {lead.submittedAt}
 </p>
       </div>
