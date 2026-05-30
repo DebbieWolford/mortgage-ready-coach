@@ -52,6 +52,7 @@ goal: "",
 const [leadSubmitted, setLeadSubmitted] = useState(false);
 const [leads, setLeads] = useState<any[]>([]);
 const [leadSearch, setLeadSearch] = useState("");
+  const [leadSort, setLeadSort] = useState("newest");
 const [chatHistory, setChatHistory] = useState<
   { role: "Borrower" | "Mortgage Ready Coach"; message: string }[]
 >([]);
@@ -825,14 +826,25 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   ))}
 </div>
                  <div className="rounded-2xl bg-slate-50 p-5 md:col-span-3">
-                   <div className="mb-4">
+                   <div className="mb-4 flex gap-4">
   <input
     type="text"
     placeholder="Search by name, email, or phone..."
     value={leadSearch}
     onChange={(e) => setLeadSearch(e.target.value)}
-    className="w-full rounded-lg border px-3 py-2"
+    className="flex-1 rounded-lg border px-3 py-2"
   />
+
+  <select
+    value={leadSort}
+    onChange={(e) => setLeadSort(e.target.value)}
+    className="rounded-lg border px-3 py-2"
+  >
+    <option value="newest">Newest First</option>
+    <option value="oldest">Oldest First</option>
+    <option value="highest">Highest Price</option>
+    <option value="lowest">Lowest Price</option>
+  </select>
 </div>
   <h3 className="font-bold">Captured Leads</h3>
   <p className="mt-2 text-3xl font-extrabold">
