@@ -413,6 +413,23 @@ const topics: string[] = [];
                 <p><strong>Type:</strong> {doc.document_type}</p>
                 <p><strong>File:</strong> {doc.file_name}</p>
                 <p><strong>Status:</strong> {doc.status}</p>
+                <button
+    onClick={async () => {
+    const { data, error } = await supabase.storage
+      .from("borrower-documents")
+      .createSignedUrl(doc.file_path, 60);
+
+    if (error || !data?.signedUrl) {
+      alert("Could not open document.");
+      return;
+    }
+
+    window.open(data.signedUrl, "_blank");
+  }}
+  className="mt-2 rounded-lg bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
+>
+  Open Document
+</button>
               </div>
             ))}
         </div>
