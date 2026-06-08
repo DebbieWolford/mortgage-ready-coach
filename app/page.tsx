@@ -57,6 +57,7 @@ const [leadSearch, setLeadSearch] = useState("");
 const [uploading, setUploading] = useState(false);
 const [documentType, setDocumentType] = useState("Pay Stub");
 const [uploadedDocuments, setUploadedDocuments] = useState<any[]>([]);
+  const [viewingDocumentsLeadId, setViewingDocumentsLeadId] = useState<number | null>(null);
   const [editingLeadId, setEditingLeadId] = useState<number | null>(null);
 const [editLeadForm, setEditLeadForm] = useState<any>({});
 const [chatHistory, setChatHistory] = useState<
@@ -92,6 +93,18 @@ const [chatHistory, setChatHistory] = useState<
   };
 
   loadLeads();
+    const loadDocuments = async () => {
+  const { data, error } = await supabase
+    .from("documents")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (!error && data) {
+    setUploadedDocuments(data);
+  }
+};
+
+loadDocuments();
 }, []);
   const updateLeadStatus = async (leadId: number, newStatus: string) => {
   setLeads(
@@ -382,6 +395,36 @@ const topics: string[] = [];
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
+      {viewingDocumentsLeadId && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+    <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl">
+      <h2 className="mb-4 text-xl font-bold">Uploaded Documents</h2>
+
+      {uploadedDocuments.filter((doc) => doc.lead_id === viewingDocumentsLeadId).length === 0 ? (
+        <p className="text-sm text-slate-600">No documents uploaded for this lead yet.</p>
+      ) : (
+        <div className="space-y-3">
+          {uploadedDocuments
+            .filter((doc) => doc.lead_id === viewingDocumentsLeadId)
+            .map((doc, index) => (
+              <div key={index} className="rounded-lg border bg-slate-50 p-3 text-sm">
+                <p><strong>Type:</strong> {doc.document_type}</p>
+                <p><strong>File:</strong> {doc.file_name}</p>
+                <p><strong>Status:</strong> {doc.status}</p>
+              </div>
+            ))}
+        </div>
+      )}
+
+      <button
+        onClick={() => setViewingDocumentsLeadId(null)}
+        className="mt-4 rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
       <header className="border-b bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2 text-lg font-bold">
@@ -1151,8 +1194,9 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     <option>Other</option>
   </select>
 
-  <input
-    type="file"
+ <input
+  type="file"
+  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
     onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
     className="mb-2 w-full text-sm"
   />
@@ -1174,7 +1218,12 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 >
   Edit Lead
 </button>
-
+<button
+  onClick={() => setViewingDocumentsLeadId(lead.id)}
+  className="mt-3 mr-2 rounded-lg bg-green-600 px-3 py-2 text-white hover:bg-green-700"
+>
+  View Documents
+</button>
 <button
   onClick={async () => {
     await supabase
