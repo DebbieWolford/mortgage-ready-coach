@@ -1208,6 +1208,12 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   >
     {uploading ? "Uploading..." : "Upload Document"}
   </button>
+ <button
+  onClick={() => setViewingDocumentsLeadId(lead.id)}
+  className="ml-2 rounded-lg bg-green-600 px-3 py-2 text-sm text-white hover:bg-green-700"
+>
+  View Documents
+</button> 
 </div>
 <button
   onClick={() => {
@@ -1218,12 +1224,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 >
   Edit Lead
 </button>
-<button
-  onClick={() => setViewingDocumentsLeadId(lead.id)}
-  className="mt-3 mr-2 rounded-lg bg-green-600 px-3 py-2 text-white hover:bg-green-700"
->
-  View Documents
-</button>
+
 <button
   onClick={async () => {
     await supabase
