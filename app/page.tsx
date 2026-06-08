@@ -53,6 +53,10 @@ const [leadSubmitted, setLeadSubmitted] = useState(false);
 const [leads, setLeads] = useState<any[]>([]);
 const [leadSearch, setLeadSearch] = useState("");
   const [leadSort, setLeadSort] = useState("newest");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+const [uploading, setUploading] = useState(false);
+const [documentType, setDocumentType] = useState("Pay Stub");
+const [uploadedDocuments, setUploadedDocuments] = useState<any[]>([]);
   const [editingLeadId, setEditingLeadId] = useState<number | null>(null);
 const [editLeadForm, setEditLeadForm] = useState<any>({});
 const [chatHistory, setChatHistory] = useState<
@@ -100,6 +104,59 @@ const [chatHistory, setChatHistory] = useState<
     .from("leads")
     .update({ status: newStatus })
     .eq("id", leadId);
+};
+  const handleDocumentUpload = async (leadId: number) => {
+  if (!selectedFile) {
+    alert("Please choose a file before uploading.");
+    return;
+  }
+
+  setUploading(true);
+
+  const filePath = `${leadId}/${Date.now()}-${selectedFile.name}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("borrower-documents")
+    .upload(filePath, selectedFile);
+
+  if (uploadError) {
+    alert("Upload failed: " + uploadError.message);
+    setUploading(false);
+    return;
+  }
+
+  const { error: dbError } = await supabase.from("documents").insert([
+    {
+      lead_id: leadId,
+      file_name: selectedFile.name,
+      file_path: filePath,
+      document_type: documentType,
+      uploaded_by: "borrower",
+      status: "Uploaded",
+    },
+  ]);
+
+  if (dbError) {
+    alert("File uploaded, but document record failed: " + dbError.message);
+    setUploading(false);
+    return;
+  }
+
+  setUploadedDocuments([
+    {
+      lead_id: leadId,
+      file_name: selectedFile.name,
+      file_path: filePath,
+      document_type: documentType,
+      uploaded_by: "borrower",
+      status: "Uploaded",
+    },
+    ...uploadedDocuments,
+  ]);
+
+  setSelectedFile(null);
+  setUploading(false);
+  alert("Document uploaded successfully.");
 };
   const updateAnswer = (field: string, value: string) => {
     setAnswers({ ...answers, [field]: value });
@@ -1076,7 +1133,38 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
           <p className="mt-2 text-xs text-slate-500">
   Submitted: {lead.submittedAt}
 </p>
+<div className="mt-4 rounded-lg border bg-slate-50 p-3">
+  <p className="mb-2 font-bold">Upload Documents</p>
 
+  <select
+    value={documentType}
+    onChange={(e) => setDocumentType(e.target.value)}
+    className="mb-2 w-full rounded-lg border px-2 py-1 text-sm"
+  >
+    <option>Pay Stub</option>
+    <option>W-2</option>
+    <option>Bank Statement</option>
+    <option>Tax Return</option>
+    <option>Driver's License</option>
+    <option>Purchase Contract</option>
+    <option>Rent History</option>
+    <option>Other</option>
+  </select>
+
+  <input
+    type="file"
+    onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+    className="mb-2 w-full text-sm"
+  />
+
+  <button
+    onClick={() => handleDocumentUpload(lead.id)}
+    disabled={uploading}
+    className="rounded-lg bg-blue-600 px-3 py-2 text-sm text-white hover:bg-blue-700"
+  >
+    {uploading ? "Uploading..." : "Upload Document"}
+  </button>
+</div>
 <button
   onClick={() => {
     setEditingLeadId(lead.id);
