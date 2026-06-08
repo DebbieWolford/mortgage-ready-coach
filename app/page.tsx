@@ -430,6 +430,28 @@ const topics: string[] = [];
 >
   Open Document
 </button>
+                <button
+  onClick={async () => {
+    const { data, error } = await supabase.storage
+      .from("borrower-documents")
+      .createSignedUrl(doc.file_path, 60);
+
+    if (error || !data?.signedUrl) {
+      alert("Could not download document.");
+      return;
+    }
+
+    const link = document.createElement("a");
+    link.href = data.signedUrl;
+    link.download = doc.file_name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }}
+  className="mt-2 ml-2 rounded-lg bg-slate-700 px-3 py-1 text-sm text-white hover:bg-slate-800"
+>
+  Download
+</button>
               </div>
             ))}
         </div>
