@@ -101,6 +101,7 @@ const [chatHistory, setChatHistory] = useState<
 
   if (!error && data) {
     setUploadedDocuments(data);
+    console.log("Documents:", data);
   }
 };
 
@@ -108,6 +109,7 @@ loadDocuments();
 }, []);
   const updateLeadStatus = async (leadId: number, newStatus: string) => {
   setLeads(
+    console.log("Leads:", data);
     leads.map((lead) =>
       lead.id === leadId ? { ...lead, status: newStatus } : lead
     )
