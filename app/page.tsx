@@ -109,7 +109,7 @@ loadDocuments();
 }, []);
   const updateLeadStatus = async (leadId: number, newStatus: string) => {
   setLeads(
-    console.log("Leads:", data);
+    
     leads.map((lead) =>
       lead.id === leadId ? { ...lead, status: newStatus } : lead
     )
