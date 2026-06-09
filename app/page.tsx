@@ -1285,7 +1285,52 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     {leads.filter((lead) => lead.status === "Canceled / Withdrawn").length}
   </p>
 </div>
-</div>               
+</div>    
+                   <div className="mt-6 rounded-2xl bg-white p-5 shadow">
+  <h3 className="mb-4 text-lg font-bold text-slate-800">
+    Mortgage Pipeline Visualization
+  </h3>
+
+  <div className="grid gap-3 md:grid-cols-7">
+    {[
+      "New Lead",
+      "Contacted",
+      "Application Started",
+      "Underwriting",
+      "Pre-Approved",
+      "Clear to Close",
+      "Closed",
+    ].map((stage) => {
+      const stageCount = leads.filter((lead) => lead.status === stage).length;
+
+      return (
+        <div
+          key={stage}
+          className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-center"
+        >
+          <p className="text-xs font-semibold text-slate-600">{stage}</p>
+          <p className="mt-2 text-2xl font-bold text-slate-900">{stageCount}</p>
+        </div>
+      );
+    })}
+  </div>
+
+  <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-slate-600">
+    <span>New Lead</span>
+    <span>→</span>
+    <span>Contacted</span>
+    <span>→</span>
+    <span>Application Started</span>
+    <span>→</span>
+    <span>Underwriting</span>
+    <span>→</span>
+    <span>Pre-Approved</span>
+    <span>→</span>
+    <span>Clear to Close</span>
+    <span>→</span>
+    <span>Closed</span>
+  </div>
+</div>
   <h3 className="font-bold">Captured Leads</h3>
   <p className="mt-2 text-3xl font-extrabold">
 {
