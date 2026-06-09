@@ -1255,6 +1255,14 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 >
  View Documents ({uploadedDocuments.filter((doc) => doc.lead_id === lead.id).length})
 </button> 
+  <button
+  onClick={() => {
+    alert("Download All Documents feature coming next.");
+  }}
+  className="mt-3 ml-2 rounded-lg bg-purple-600 px-3 py-2 text-white hover:bg-purple-700"
+>
+  Download All
+</button>
 </div>
 <button
   onClick={() => {
