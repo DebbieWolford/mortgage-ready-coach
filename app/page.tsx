@@ -430,7 +430,42 @@ const topics: string[] = [];
       </div>
     </div>
   );
+const downloadAllDocuments = async (leadId: string) => {
+  const { data: borrowerDocuments, error } = await supabase
+    .from("documents")
+    .select("*")
+    .eq("lead_id", leadId);
 
+  if (error) {
+    alert("Could not retrieve borrower documents.");
+    return;
+  }
+
+  if (!borrowerDocuments || borrowerDocuments.length === 0) {
+    alert("No documents found for this borrower.");
+    return;
+  }
+
+  for (const doc of borrowerDocuments) {
+    const { data, error: signedUrlError } = await supabase.storage
+      .from("borrower-documents")
+      .createSignedUrl(doc.file_path, 60);
+
+    if (signedUrlError || !data?.signedUrl) {
+      console.error("Could not download document:", doc.file_name);
+      continue;
+    }
+
+    const link = document.createElement("a");
+    link.href = data.signedUrl;
+    link.download = doc.file_name || "borrower-document";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+};
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
       {viewingActivityLeadId && (
@@ -1390,14 +1425,27 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 >
  View Documents ({uploadedDocuments.filter((doc) => doc.lead_id === lead.id).length})
 </button> 
+ View Documents ({uploadedDocuments.filter((doc) => doc.lead_id === lead.id).length})
+</button> 
   <button
-  onClick={() => {
-    alert("Download All Documents feature coming next.");
-  }}
+  onClick={() => downloadAllDocuments(lead.id)}
   className="mt-3 ml-2 rounded-lg bg-purple-600 px-3 py-2 text-white hover:bg-purple-700"
 >
   Download All
 </button>
+  <button
+  onClick={() => setViewingActivityLeadId(lead.id)}
+  className="mt-3 ml-2 rounded-lg bg-slate-600 px-3 py-2 text-white hover:bg-slate-700"
+>
+  Activity Log
+</button>
+</div>
+<button
+  onClick={() => {
+    setEditingLeadId(lead.id);
+    setEditLeadForm(lead);
+  }}
+  className="mt-3 mr-2 rounded-lg bg-slate-900 px-3 py-2 text-white hover:bg-slate-700"
   <button
   onClick={() => setViewingActivityLeadId(lead.id)}
   className="mt-3 ml-2 rounded-lg bg-slate-600 px-3 py-2 text-white hover:bg-slate-700"
