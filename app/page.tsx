@@ -1122,6 +1122,38 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     <option value="lowest">Lowest Price</option>
   </select>
 </div>
+    <div className="mb-6 grid gap-4 md:grid-cols-5">
+  <div className="rounded-2xl bg-slate-50 p-4">
+    <p className="text-sm text-slate-600">Total Leads</p>
+    <p className="text-2xl font-bold">{leads.length}</p>
+  </div>
+
+  <div className="rounded-2xl bg-blue-50 p-4">
+    <p className="text-sm text-slate-600">New Leads</p>
+    <p className="text-2xl font-bold">
+      {leads.filter((lead) => lead.status === "New Lead").length}
+    </p>
+  </div>
+
+  <div className="rounded-2xl bg-yellow-50 p-4">
+    <p className="text-sm text-slate-600">Application Started</p>
+    <p className="text-2xl font-bold">
+      {leads.filter((lead) => lead.status === "Application Started").length}
+    </p>
+  </div>
+
+  <div className="rounded-2xl bg-green-50 p-4">
+    <p className="text-sm text-slate-600">Pre-Approved</p>
+    <p className="text-2xl font-bold">
+      {leads.filter((lead) => lead.status === "Pre-Approved").length}
+    </p>
+  </div>
+
+  <div className="rounded-2xl bg-purple-50 p-4">
+    <p className="text-sm text-slate-600">Documents Uploaded</p>
+    <p className="text-2xl font-bold">{uploadedDocuments.length}</p>
+  </div>
+</div>               
   <h3 className="font-bold">Captured Leads</h3>
   <p className="mt-2 text-3xl font-extrabold">
 {
