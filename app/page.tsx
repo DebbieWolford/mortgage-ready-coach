@@ -1423,11 +1423,10 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   onClick={() => setViewingDocumentsLeadId(lead.id)}
   className="ml-2 rounded-lg bg-green-600 px-3 py-2 text-sm text-white hover:bg-green-700"
 >
- View Documents ({uploadedDocuments.filter((doc) => doc.lead_id === lead.id).length})
-</button> 
- View Documents ({uploadedDocuments.filter((doc) => doc.lead_id === lead.id).length})
-</button> 
-  <button
+  View Documents ({uploadedDocuments.filter((doc) => doc.lead_id === lead.id).length})
+</button>
+
+<button
   onClick={() => downloadAllDocuments(lead.id)}
   className="mt-3 ml-2 rounded-lg bg-purple-600 px-3 py-2 text-white hover:bg-purple-700"
 >
