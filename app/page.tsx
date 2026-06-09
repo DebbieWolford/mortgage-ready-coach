@@ -115,10 +115,14 @@ loadDocuments();
     )
   );
 
-  await supabase
-    .from("leads")
-    .update({ status: newStatus })
-    .eq("id", leadId);
+ const { error } = await supabase
+  .from("leads")
+  .update({ status: newStatus })
+  .eq("id", leadId);
+
+if (error) {
+  console.log("Status Update Error:", error);
+}
     await supabase
   .from("activity_log")
   .insert([
