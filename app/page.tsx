@@ -119,6 +119,15 @@ loadDocuments();
     .from("leads")
     .update({ status: newStatus })
     .eq("id", leadId);
+    await supabase
+  .from("activity_log")
+  .insert([
+    {
+      lead_id: leadId,
+      activity_type: "Status Change",
+      description: `Status changed to ${newStatus}`,
+    },
+  ]);
 };
   const handleDocumentUpload = async (leadId: number) => {
   if (!selectedFile) {
