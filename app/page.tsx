@@ -1561,7 +1561,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </div>
 </div>    
   )}
-                   <div className="mt-6 rounded-2xl bg-white p-5 shadow">
+                   <div className={previewRole === "Borrower" ? "hidden" : "mt-6 rounded-2xl bg-white p-5 shadow"}>
   <h3 className="mb-4 text-lg font-bold text-slate-800">
     Mortgage Pipeline Visualization
   </h3>
