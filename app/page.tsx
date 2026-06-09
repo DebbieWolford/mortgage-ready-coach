@@ -1439,19 +1439,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   Activity Log
 </button>
 </div>
-<button
-  onClick={() => {
-    setEditingLeadId(lead.id);
-    setEditLeadForm(lead);
-  }}
-  className="mt-3 mr-2 rounded-lg bg-slate-900 px-3 py-2 text-white hover:bg-slate-700"
-  <button
-  onClick={() => setViewingActivityLeadId(lead.id)}
-  className="mt-3 ml-2 rounded-lg bg-slate-600 px-3 py-2 text-white hover:bg-slate-700"
->
-  Activity Log
-</button>
-</div>
+
 <button
   onClick={() => {
     setEditingLeadId(lead.id);
