@@ -449,7 +449,9 @@ const downloadAllDocuments = async (leadId: string) => {
   for (const doc of borrowerDocuments) {
     const { data, error: signedUrlError } = await supabase.storage
       .from("borrower-documents")
-      .createSignedUrl(doc.file_path, 60);
+    .createSignedUrl(doc.file_path, 60, {
+  download: doc.file_name || "borrower-document",
+});
 
     if (signedUrlError || !data?.signedUrl) {
       console.error("Could not download document:", doc.file_name);
