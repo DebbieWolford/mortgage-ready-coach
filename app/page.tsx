@@ -58,6 +58,8 @@ const [uploading, setUploading] = useState(false);
 const [documentType, setDocumentType] = useState("Pay Stub");
 const [uploadedDocuments, setUploadedDocuments] = useState<any[]>([]);
   const [viewingDocumentsLeadId, setViewingDocumentsLeadId] = useState<number | null>(null);
+  const [activityLogs, setActivityLogs] = useState<any[]>([]);
+const [viewingActivityLeadId, setViewingActivityLeadId] = useState<number | null>(null);
   const [editingLeadId, setEditingLeadId] = useState<number | null>(null);
 const [editLeadForm, setEditLeadForm] = useState<any>({});
 const [chatHistory, setChatHistory] = useState<
@@ -104,8 +106,20 @@ const [chatHistory, setChatHistory] = useState<
     console.log("Documents:", data);
   }
 };
+    const loadActivityLogs = async () => {
+  const { data, error } = await supabase
+    .from("activity_log")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (!error && data) {
+    setActivityLogs(data);
+    console.log("Activity Logs:", data);
+  }
+};
 
 loadDocuments();
+loadActivityLogs();
 }, []);
   const updateLeadStatus = async (leadId: number, newStatus: string) => {
   setLeads(
