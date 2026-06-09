@@ -1131,6 +1131,46 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
       </div>
     </div>
       <div className="rounded-xl bg-white p-4 shadow-sm">
+  <h3 className="mb-3 font-bold text-slate-900">Borrower Document Checklist</h3>
+
+  <div className="grid gap-2 md:grid-cols-2">
+    {[
+      "Pay Stub",
+      "W-2",
+      "Bank Statement",
+      "Tax Return",
+      "Driver's License",
+      "Purchase Contract",
+      "Rent History",
+      "Other",
+    ].map((requiredDoc) => {
+      const hasDocument = uploadedDocuments.some(
+        (doc) =>
+          doc.lead_id === borrowerPortalLead.id &&
+          doc.document_type === requiredDoc
+      );
+
+      return (
+        <div
+          key={requiredDoc}
+          className="flex items-center justify-between rounded-lg border bg-slate-50 px-3 py-2 text-sm"
+        >
+          <span>{requiredDoc}</span>
+          <span
+            className={
+              hasDocument
+                ? "font-semibold text-green-700"
+                : "font-semibold text-red-600"
+            }
+          >
+            {hasDocument ? "Uploaded" : "Needed"}
+          </span>
+        </div>
+      );
+    })}
+  </div>
+</div>
+      <div className="rounded-xl bg-white p-4 shadow-sm">
   <h3 className="mb-2 font-bold text-slate-900">Upload a Document</h3>
   <p className="mb-3 text-sm text-slate-600">
     Add documents directly to this borrower file.
