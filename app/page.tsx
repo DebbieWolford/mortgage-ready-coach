@@ -1085,6 +1085,18 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   <p className="mt-2 text-sm text-slate-600">
     Current preview: {previewRole}
   </p>
+                <div className="mt-4 rounded-xl bg-slate-50 p-4">
+  <p className="text-sm text-slate-700">
+    {previewRole === "Borrower" &&
+      "Borrower view focuses on readiness status, document uploads, checklist items, and next steps."}
+
+    {previewRole === "Loan Officer" &&
+      "Loan Officer view focuses on lead management, borrower readiness, pipeline status, document review, and activity tracking."}
+
+    {previewRole === "Admin" &&
+      "Admin view will focus on company settings, users, roles, reporting, and overall platform management."}
+  </p>
+</div>
 </div>
      <div className="mb-6 rounded-2xl bg-slate-50 p-5">
   <h2 className="mb-2 text-xl font-bold text-slate-900">Borrower Portal</h2>
