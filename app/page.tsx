@@ -424,6 +424,38 @@ const topics: string[] = [];
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
+      {viewingActivityLeadId && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+    <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl">
+      <h2 className="mb-4 text-xl font-bold">Activity Log</h2>
+
+      {activityLogs.filter((log) => log.lead_id === viewingActivityLeadId).length === 0 ? (
+        <p className="text-sm text-slate-600">No activity recorded for this lead yet.</p>
+      ) : (
+        <div className="space-y-3">
+          {activityLogs
+            .filter((log) => log.lead_id === viewingActivityLeadId)
+            .map((log, index) => (
+              <div key={index} className="rounded-lg border bg-slate-50 p-3 text-sm">
+                <p><strong>Type:</strong> {log.activity_type}</p>
+                <p><strong>Description:</strong> {log.description}</p>
+                <p className="text-xs text-slate-500">
+                  {new Date(log.created_at).toLocaleString()}
+                </p>
+              </div>
+            ))}
+        </div>
+      )}
+
+      <button
+        onClick={() => setViewingActivityLeadId(null)}
+        className="mt-4 rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
       {viewingDocumentsLeadId && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
     <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl">
@@ -1356,6 +1388,12 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   className="mt-3 ml-2 rounded-lg bg-purple-600 px-3 py-2 text-white hover:bg-purple-700"
 >
   Download All
+</button>
+  <button
+  onClick={() => setViewingActivityLeadId(lead.id)}
+  className="mt-3 ml-2 rounded-lg bg-slate-600 px-3 py-2 text-white hover:bg-slate-700"
+>
+  Activity Log
 </button>
 </div>
 <button
