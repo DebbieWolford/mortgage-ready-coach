@@ -1122,7 +1122,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     <option value="lowest">Lowest Price</option>
   </select>
 </div>
-    <div className="mb-6 grid gap-4 md:grid-cols-5">
+    <div className="mb-6 grid gap-4 md:grid-cols-3 lg:grid-cols-9">
   <div className="rounded-2xl bg-slate-50 p-4">
     <p className="text-sm text-slate-600">Total Leads</p>
     <p className="text-2xl font-bold">{leads.length}</p>
@@ -1153,6 +1153,33 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     <p className="text-sm text-slate-600">Documents Uploaded</p>
     <p className="text-2xl font-bold">{uploadedDocuments.length}</p>
   </div>
+      <div className="rounded-2xl bg-purple-100 p-4">
+  <p className="text-sm text-slate-600">Underwriting</p>
+  <p className="text-2xl font-bold">
+    {leads.filter((lead) => lead.status === "Underwriting").length}
+  </p>
+</div>
+
+<div className="rounded-2xl bg-emerald-50 p-4">
+  <p className="text-sm text-slate-600">Clear to Close</p>
+  <p className="text-2xl font-bold">
+    {leads.filter((lead) => lead.status === "Clear to Close").length}
+  </p>
+</div>
+
+<div className="rounded-2xl bg-green-100 p-4">
+  <p className="text-sm text-slate-600">Closed</p>
+  <p className="text-2xl font-bold">
+    {leads.filter((lead) => lead.status === "Closed").length}
+  </p>
+</div>
+
+<div className="rounded-2xl bg-red-50 p-4">
+  <p className="text-sm text-slate-600">Canceled / Withdrawn</p>
+  <p className="text-2xl font-bold">
+    {leads.filter((lead) => lead.status === "Canceled / Withdrawn").length}
+  </p>
+</div>
 </div>               
   <h3 className="font-bold">Captured Leads</h3>
   <p className="mt-2 text-3xl font-extrabold">
