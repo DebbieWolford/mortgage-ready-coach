@@ -1098,6 +1098,15 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </p>
 </div>
 </div>
+              {previewRole === "Admin" && (
+  <div className="mb-6 rounded-2xl border border-purple-200 bg-purple-50 p-4">
+    <h3 className="mb-2 font-bold text-slate-900">Admin Preview</h3>
+    <p className="text-sm text-slate-700">
+      Admin users will eventually manage company settings, users, roles, reporting,
+      and platform-level configuration.
+    </p>
+  </div>
+)}
      <div className="mb-6 rounded-2xl bg-slate-50 p-5">
   <h2 className="mb-2 text-xl font-bold text-slate-900">Borrower Portal</h2>
   <p className="mb-4 text-sm text-slate-600">
