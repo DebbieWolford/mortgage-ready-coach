@@ -1213,7 +1213,6 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </div>
 )}
 </div>
-</div>
 )}
 </div>
 {editingLeadId && (
