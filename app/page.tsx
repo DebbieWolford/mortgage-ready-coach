@@ -1096,7 +1096,8 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   )}
 
   {borrowerPortalLead && (
-    <div className="mt-5 grid gap-4 md:grid-cols-4">
+    <div className="mt-5 space-y-4">
+      <div className="grid gap-4 md:grid-cols-4">
       <div className="rounded-xl bg-white p-4 shadow-sm">
         <p className="text-sm text-slate-600">Borrower</p>
         <p className="text-lg font-bold">
@@ -1129,6 +1130,42 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
         </p>
       </div>
     </div>
+      <div className="rounded-xl bg-white p-4 shadow-sm">
+  <h3 className="mb-2 font-bold text-slate-900">Upload a Document</h3>
+  <p className="mb-3 text-sm text-slate-600">
+    Add documents directly to this borrower file.
+  </p>
+
+  <select
+    value={documentType}
+    onChange={(e) => setDocumentType(e.target.value)}
+    className="mb-3 w-full rounded-lg border px-3 py-2 text-sm"
+  >
+    <option>Pay Stub</option>
+    <option>W-2</option>
+    <option>Bank Statement</option>
+    <option>Tax Return</option>
+    <option>Driver's License</option>
+    <option>Purchase Contract</option>
+    <option>Rent History</option>
+    <option>Other</option>
+  </select>
+
+  <input
+    type="file"
+    accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+    onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+    className="mb-3 w-full text-sm"
+  />
+
+  <button
+    onClick={() => handleDocumentUpload(borrowerPortalLead.id)}
+    disabled={uploading}
+    className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700 disabled:bg-slate-400"
+  >
+    {uploading ? "Uploading..." : "Upload to My File"}
+  </button>
+</div>
   )}
 </div>         
 {editingLeadId && (
