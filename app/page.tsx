@@ -198,6 +198,15 @@ if (error) {
 
   setSelectedFile(null);
   setUploading(false);
+    await supabase
+  .from("activity_log")
+  .insert([
+    {
+      lead_id: leadId,
+      activity_type: "Document Upload",
+      description: `Uploaded ${documentType}: ${selectedFile.name}`,
+    },
+  ]);
   alert("Document uploaded successfully.");
 };
   const updateAnswer = (field: string, value: string) => {
