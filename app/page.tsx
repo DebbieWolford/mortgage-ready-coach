@@ -1120,6 +1120,66 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
                 Track readiness, documents, leads, and next steps.
               </p>
               <div className="mb-6 rounded-2xl border bg-white p-4 shadow-sm">
+  <h3 className="mb-3 text-lg font-bold text-slate-900">Account Access</h3>
+
+  {currentUserEmail ? (
+    <div className="space-y-3">
+      <p className="text-sm text-slate-700">
+        Logged in as <span className="font-semibold">{currentUserEmail}</span>
+      </p>
+
+      <button
+        onClick={handleLogout}
+        className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+      >
+        Log Out
+      </button>
+    </div>
+  ) : (
+    <div className="grid gap-3 md:grid-cols-3">
+      <input
+        type="email"
+        value={authEmail}
+        onChange={(e) => setAuthEmail(e.target.value)}
+        placeholder="Email address"
+        className="rounded-lg border px-3 py-2 text-sm"
+      />
+
+      <input
+        type="password"
+        value={authPassword}
+        onChange={(e) => setAuthPassword(e.target.value)}
+        placeholder="Password"
+        className="rounded-lg border px-3 py-2 text-sm"
+      />
+
+      <div className="flex gap-2">
+        <button
+          onClick={handleLogin}
+          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+        >
+          Log In
+        </button>
+
+        <button
+          onClick={handleSignUp}
+          className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
+        >
+          Sign Up
+        </button>
+      </div>
+    </div>
+  )}
+
+  {authMessage && (
+    <p className="mt-3 text-sm font-semibold text-slate-700">{authMessage}</p>
+  )}
+
+  <p className="mt-3 text-xs text-slate-500">
+    Phase 9B MVP: Account access is being added for future borrower, loan officer, and admin permissions.
+  </p>
+</div>
+              <div className="mb-6 rounded-2xl border bg-white p-4 shadow-sm">
   <label className="mb-2 block text-sm font-semibold text-slate-700">
     Preview Role
   </label>
