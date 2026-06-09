@@ -1446,6 +1446,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </div>
    </div>
 )}
+              {previewRole !== "Borrower" && (
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="rounded-2xl bg-slate-50 p-5">
                   <h3 className="font-bold">Readiness Score</h3>
@@ -1478,6 +1479,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     </div>
   ))}
 </div>
+                )}
                  <div className="rounded-2xl bg-slate-50 p-5 md:col-span-3">
                    <div className="mb-4 flex gap-4">
   <input
