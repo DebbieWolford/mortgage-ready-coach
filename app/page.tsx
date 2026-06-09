@@ -1499,6 +1499,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     <option value="lowest">Lowest Price</option>
   </select>
 </div>
+                   {previewRole !== "Borrower" && (
     <div className="mb-6 grid gap-4 md:grid-cols-3 lg:grid-cols-9">
   <div className="rounded-2xl bg-slate-50 p-4">
     <p className="text-sm text-slate-600">Total Leads</p>
@@ -1558,6 +1559,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </p>
 </div>
 </div>    
+  )}
                    <div className="mt-6 rounded-2xl bg-white p-5 shadow">
   <h3 className="mb-4 text-lg font-bold text-slate-800">
     Mortgage Pipeline Visualization
