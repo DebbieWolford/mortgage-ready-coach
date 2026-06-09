@@ -24,6 +24,10 @@ export default function MortgageReadyCoach() {
 );
   const [screen, setScreen] = useState("landing");
   const [previewRole, setPreviewRole] = useState("Loan Officer");
+  const [authEmail, setAuthEmail] = useState("");
+const [authPassword, setAuthPassword] = useState("");
+const [authMessage, setAuthMessage] = useState("");
+const [currentUserEmail, setCurrentUserEmail] = useState("");
   const [progress, setProgress] = useState(15);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState(
@@ -493,6 +497,54 @@ const downloadAllDocuments = async (leadId: string) => {
 
   setBorrowerPortalLead(foundLead);
   setBorrowerPortalMessage("");
+};
+  const handleSignUp = async () => {
+  setAuthMessage("");
+
+  if (!authEmail || !authPassword) {
+    setAuthMessage("Please enter an email and password.");
+    return;
+  }
+
+  const { error } = await supabase.auth.signUp({
+    email: authEmail,
+    password: authPassword,
+  });
+
+  if (error) {
+    setAuthMessage(error.message);
+    return;
+  }
+
+  setAuthMessage("Account created. Please check your email if confirmation is required.");
+};
+
+const handleLogin = async () => {
+  setAuthMessage("");
+
+  if (!authEmail || !authPassword) {
+    setAuthMessage("Please enter an email and password.");
+    return;
+  }
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: authEmail,
+    password: authPassword,
+  });
+
+  if (error) {
+    setAuthMessage(error.message);
+    return;
+  }
+
+  setCurrentUserEmail(data.user?.email || "");
+  setAuthMessage("Logged in successfully.");
+};
+
+const handleLogout = async () => {
+  await supabase.auth.signOut();
+  setCurrentUserEmail("");
+  setAuthMessage("Logged out successfully.");
 };
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
