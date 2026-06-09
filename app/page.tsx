@@ -1130,6 +1130,37 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
         </p>
       </div>
     </div>
+      <div className="rounded-xl bg-blue-50 p-4">
+  <h3 className="mb-2 font-bold text-slate-900">Status Guidance</h3>
+  <p className="text-sm text-slate-700">
+    {borrowerPortalLead.status === "New Lead" &&
+      "Your file has been created. Your loan team will review your information and contact you with next steps."}
+
+    {borrowerPortalLead.status === "Contacted" &&
+      "Your loan team has made contact and may be gathering more information before the next step."}
+
+    {borrowerPortalLead.status === "Application Started" &&
+      "Your application process has started. Continue uploading requested documents so your file can move forward."}
+
+    {borrowerPortalLead.status === "Underwriting" &&
+      "Your file is being reviewed. Your loan team may request additional documentation."}
+
+    {borrowerPortalLead.status === "Pre-Approved" &&
+      "You are in a strong position to continue toward your home financing goal. Keep your documents updated."}
+
+    {borrowerPortalLead.status === "Clear to Close" &&
+      "Your file is nearing the finish line. Your loan team will coordinate final closing steps."}
+
+    {borrowerPortalLead.status === "Closed" &&
+      "Congratulations. Your loan file has reached the closed stage."}
+
+    {borrowerPortalLead.status === "Canceled / Withdrawn" &&
+      "This file is currently marked as canceled or withdrawn. Contact your loan team if this needs to be reviewed."}
+
+    {!borrowerPortalLead.status &&
+      "Your file has been created. Your loan team will review your information and contact you with next steps."}
+  </p>
+</div>
       <div className="rounded-xl bg-white p-4 shadow-sm">
   <h3 className="mb-3 font-bold text-slate-900">Borrower Document Checklist</h3>
 
