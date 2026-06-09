@@ -23,6 +23,7 @@ export default function MortgageReadyCoach() {
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
   const [screen, setScreen] = useState("landing");
+  const [previewRole, setPreviewRole] = useState("Loan Officer");
   const [progress, setProgress] = useState(15);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState(
@@ -1066,6 +1067,25 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
               <p className="mb-6 text-slate-600">
                 Track readiness, documents, leads, and next steps.
               </p>
+              <div className="mb-6 rounded-2xl border bg-white p-4 shadow-sm">
+  <label className="mb-2 block text-sm font-semibold text-slate-700">
+    Preview Role
+  </label>
+
+  <select
+    value={previewRole}
+    onChange={(e) => setPreviewRole(e.target.value)}
+    className="w-full rounded-lg border px-3 py-2 text-sm md:w-64"
+  >
+    <option>Borrower</option>
+    <option>Loan Officer</option>
+    <option>Admin</option>
+  </select>
+
+  <p className="mt-2 text-sm text-slate-600">
+    Current preview: {previewRole}
+  </p>
+</div>
      <div className="mb-6 rounded-2xl bg-slate-50 p-5">
   <h2 className="mb-2 text-xl font-bold text-slate-900">Borrower Portal</h2>
   <p className="mb-4 text-sm text-slate-600">
