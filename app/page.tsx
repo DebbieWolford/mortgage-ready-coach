@@ -1205,6 +1205,13 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   >
     {uploading ? "Uploading..." : "Upload to My File"}
  </button>
+        
+<p className="mt-3 text-sm text-slate-600">
+  Your loan team will review uploaded documents and contact you with next steps.
+</p>
+</div>
+</div>
+)}
 </div>
 </div>
 )}
