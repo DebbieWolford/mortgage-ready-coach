@@ -52,6 +52,9 @@ goal: "",
 const [leadSubmitted, setLeadSubmitted] = useState(false);
 const [leads, setLeads] = useState<any[]>([]);
 const [leadSearch, setLeadSearch] = useState("");
+  const [borrowerPortalEmail, setBorrowerPortalEmail] = useState("");
+const [borrowerPortalLead, setBorrowerPortalLead] = useState<any>(null);
+const [borrowerPortalMessage, setBorrowerPortalMessage] = useState("");
   const [leadSort, setLeadSort] = useState("newest");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 const [uploading, setUploading] = useState(false);
@@ -468,6 +471,28 @@ const downloadAllDocuments = async (leadId: string) => {
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
 };
+  const findBorrowerPortalLead = () => {
+  const foundLead = leads.find(
+    (lead) =>
+      lead.email?.toLowerCase().trim() ===
+      borrowerPortalEmail.toLowerCase().trim()
+  );
+
+  if (!borrowerPortalEmail.trim()) {
+    setBorrowerPortalLead(null);
+    setBorrowerPortalMessage("Please enter your email address.");
+    return;
+  }
+
+  if (!foundLead) {
+    setBorrowerPortalLead(null);
+    setBorrowerPortalMessage("No borrower file was found for that email.");
+    return;
+  }
+
+  setBorrowerPortalLead(foundLead);
+  setBorrowerPortalMessage("");
+};
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
       {viewingActivityLeadId && (
@@ -667,6 +692,7 @@ const downloadAllDocuments = async (leadId: string) => {
                     { icon: FileText, title: "Document Checklist", text: "Know what to gather before applying.", screen: "dashboard" },
                     { icon: BrainCircuit, title: "AI Mortgage Coach", text: "Get plain-English readiness guidance.", screen: "coach" },
                     { icon: LayoutDashboard, title: "Borrower Dashboard", text: "Track progress and next steps.", screen: "dashboard" },
+            { icon: LayoutDashboard, title: "Borrower Portal", text: "Borrowers can look up their file by email.", screen: "dashboard" },
                   ].map((item) => (
                     <button
                       key={item.title}
@@ -1040,6 +1066,71 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
               <p className="mb-6 text-slate-600">
                 Track readiness, documents, leads, and next steps.
               </p>
+     <div className="mb-6 rounded-2xl bg-slate-50 p-5">
+  <h2 className="mb-2 text-xl font-bold text-slate-900">Borrower Portal</h2>
+  <p className="mb-4 text-sm text-slate-600">
+    Borrowers can look up their file by email to view their readiness and document status.
+  </p>
+
+  <div className="flex flex-col gap-3 md:flex-row">
+    <input
+      type="email"
+      placeholder="Enter borrower email"
+      value={borrowerPortalEmail}
+      onChange={(e) => setBorrowerPortalEmail(e.target.value)}
+      className="flex-1 rounded-lg border p-3"
+    />
+
+    <button
+      onClick={findBorrowerPortalLead}
+      className="rounded-lg bg-slate-900 px-5 py-3 text-white hover:bg-slate-700"
+    >
+      Find My File
+    </button>
+  </div>
+
+  {borrowerPortalMessage && (
+    <p className="mt-3 text-sm font-semibold text-red-600">
+      {borrowerPortalMessage}
+    </p>
+  )}
+
+  {borrowerPortalLead && (
+    <div className="mt-5 grid gap-4 md:grid-cols-4">
+      <div className="rounded-xl bg-white p-4 shadow-sm">
+        <p className="text-sm text-slate-600">Borrower</p>
+        <p className="text-lg font-bold">
+          {borrowerPortalLead.name} {borrowerPortalLead.lastName}
+        </p>
+      </div>
+
+      <div className="rounded-xl bg-white p-4 shadow-sm">
+        <p className="text-sm text-slate-600">Pipeline Status</p>
+        <p className="text-lg font-bold">
+          {borrowerPortalLead.status || "New Lead"}
+        </p>
+      </div>
+
+      <div className="rounded-xl bg-white p-4 shadow-sm">
+        <p className="text-sm text-slate-600">Readiness Score</p>
+        <p className="text-lg font-bold">
+          {borrowerPortalLead.readinessScore || 0}
+        </p>
+      </div>
+
+      <div className="rounded-xl bg-white p-4 shadow-sm">
+        <p className="text-sm text-slate-600">Documents Uploaded</p>
+        <p className="text-lg font-bold">
+          {
+            uploadedDocuments.filter(
+              (doc) => doc.lead_id === borrowerPortalLead.id
+            ).length
+          }
+        </p>
+      </div>
+    </div>
+  )}
+</div>         
 {editingLeadId && (
  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
   <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl">
