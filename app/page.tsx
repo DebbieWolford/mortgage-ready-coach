@@ -1164,10 +1164,11 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700 disabled:bg-slate-400"
   >
     {uploading ? "Uploading..." : "Upload to My File"}
-  </button>
+ </button>
 </div>
-  )}
-</div>         
+</div>
+)}
+</div>
 {editingLeadId && (
  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
   <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl">
