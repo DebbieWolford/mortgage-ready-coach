@@ -568,6 +568,7 @@ if (profileFetchError) {
 }
 
 setCurrentUserRole(profileData?.role || "Borrower");
+  setPreviewRole(profileData?.role || "Borrower");
   setAuthMessage("Logged in successfully.");
 };
 
@@ -576,6 +577,7 @@ const handleLogout = async () => {
   setCurrentUserEmail("");
   setCurrentUserId("");
   setCurrentUserRole("");
+  setPreviewRole("Loan Officer");
   setAuthEmail("");
   setAuthPassword("");
   setAuthMessage("Logged out successfully.");
