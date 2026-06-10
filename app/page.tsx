@@ -1289,7 +1289,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     </p>
   </div>
 )}
-     <div className="mb-6 rounded-2xl bg-slate-50 p-5">
+     <div className={currentUserEmail ? "mb-6 rounded-2xl bg-slate-50 p-5" : "hidden"}>
   <h2 className="mb-2 text-xl font-bold text-slate-900">Borrower Portal</h2>
   <p className="mb-4 text-sm text-slate-600">
     Borrowers can look up their file by email to view their readiness and document status.
