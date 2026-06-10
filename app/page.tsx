@@ -29,6 +29,7 @@ const [authPassword, setAuthPassword] = useState("");
 const [authMessage, setAuthMessage] = useState("");
 const [currentUserEmail, setCurrentUserEmail] = useState("");
   const [currentUserId, setCurrentUserId] = useState("");
+  const [currentUserRole, setCurrentUserRole] = useState("");
   const [progress, setProgress] = useState(15);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState(
@@ -551,10 +552,11 @@ const handleLogin = async () => {
   );
 
   if (profileError) {
-    setAuthMessage(`Logged in, but profile was not created: ${profileError.message}`);
+   setAuthMessage(`Logged in, but profile was not created: ${profileError.message}`);
     return;
   }
 }
+  setCurrentUserRole("Borrower");
   setAuthMessage("Logged in successfully.");
 };
 
@@ -562,6 +564,7 @@ const handleLogout = async () => {
   await supabase.auth.signOut();
   setCurrentUserEmail("");
   setCurrentUserId("");
+  setCurrentUserRole("");
   setAuthEmail("");
   setAuthPassword("");
   setAuthMessage("Logged out successfully.");
