@@ -48,6 +48,9 @@ const canViewPartnerDashboard =
 
 const canViewAdminTools =
   isLoggedIn && isAdmin;
+  const canEditLeads = canViewLoanOfficerDashboard;
+const canDeleteLeads = canViewAdminTools;
+const canDeleteDocuments = canViewAdminTools;
   const [progress, setProgress] = useState(15);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState(
