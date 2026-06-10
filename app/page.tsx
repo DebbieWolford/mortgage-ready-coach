@@ -1932,12 +1932,14 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   View Documents ({uploadedDocuments.filter((doc) => doc.lead_id === lead.id).length})
 </button>
 
-<button
-  onClick={() => downloadAllDocuments(lead.id)}
-  className="mt-3 ml-2 rounded-lg bg-purple-600 px-3 py-2 text-white hover:bg-purple-700"
->
-  Download All
-</button>
+{canViewLoanOfficerDashboard && (
+  <button
+    onClick={() => downloadAllDocuments(lead.id)}
+    className="mt-3 ml-2 rounded-lg bg-purple-600 px-3 py-2 text-white hover:bg-purple-700"
+  >
+    Download All
+  </button>
+)}
   {canViewLoanOfficerDashboard && (
   <button
     onClick={() => setViewingActivityLeadId(lead.id)}
