@@ -1221,8 +1221,8 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </div>
               <div className="mb-6 rounded-2xl border bg-white p-4 shadow-sm">
   <label className="mb-2 block text-sm font-semibold text-slate-700">
-    Preview Role
-  </label>
+  Current Dashboard Role
+</label>
 
   <select
     value={previewRole}
@@ -1235,7 +1235,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </select>
 
   <p className="mt-2 text-sm text-slate-600">
-    Current preview: {previewRole}
+    Current dashboard role: {previewRole}
   </p>
                 <div className="mt-4 rounded-xl bg-slate-50 p-4">
   <p className="text-sm text-slate-700">
