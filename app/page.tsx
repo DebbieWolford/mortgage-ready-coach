@@ -1238,11 +1238,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   <p className="mt-2 text-sm text-slate-600">
     Current dashboard role: {previewRole}
   </p>
-                {currentUserEmail && (
-  <p className="mt-1 text-xs text-slate-500">
-    Role is controlled by the user profile in Supabase.
-  </p>
-)}
+                
                 <div className="mt-4 rounded-xl bg-slate-50 p-4">
   <p className="text-sm text-slate-700">
     {previewRole === "Borrower" &&
