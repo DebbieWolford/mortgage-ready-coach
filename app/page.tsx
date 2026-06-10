@@ -548,7 +548,7 @@ const handleLogin = async () => {
       email: data.user.email,
       role: "Borrower",
     },
-    { onConflict: "user_id" }
+    { onConflict: "user_id", ignoreDuplicates: true }
   );
 
   if (profileError) {
