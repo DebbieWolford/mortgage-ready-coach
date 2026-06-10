@@ -1268,7 +1268,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </div>
              {currentUserEmail && previewRole === "Borrower" && (
   <div className="mb-6 rounded-2xl border border-blue-200 bg-blue-50 p-4">
-    <h3 className="mb-2 font-bold text-slate-900">Borrower Preview</h3>
+    <h3 className="mb-2 font-bold text-slate-900">Borrower Dashboard Access</h3>
     <p className="text-sm text-slate-700">
       Borrowers can view their file, upload documents, follow readiness guidance,
       and track requested documents.
