@@ -1938,12 +1938,14 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 >
   Download All
 </button>
+  {canViewLoanOfficerDashboard && (
   <button
-  onClick={() => setViewingActivityLeadId(lead.id)}
-  className="mt-3 ml-2 rounded-lg bg-slate-600 px-3 py-2 text-white hover:bg-slate-700"
->
-  Activity Log
-</button>
+    onClick={() => setViewingActivityLeadId(lead.id)}
+    className="mt-3 ml-2 rounded-lg bg-slate-600 px-3 py-2 text-white hover:bg-slate-700"
+  >
+    Activity Log
+  </button>
+)}
 </div>
 {canEditLeads && (
   <button
