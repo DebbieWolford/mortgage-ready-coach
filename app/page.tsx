@@ -540,6 +540,16 @@ const handleLogin = async () => {
 
   setCurrentUserEmail(data.user?.email || "");
   setCurrentUserId(data.user?.id || "");
+  if (data.user?.id && data.user?.email) {
+  await supabase.from("profiles").upsert(
+    {
+      user_id: data.user.id,
+      email: data.user.email,
+      role: "Borrower",
+    },
+    { onConflict: "user_id" }
+  );
+}
   setAuthMessage("Logged in successfully.");
 };
 
