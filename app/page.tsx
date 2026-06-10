@@ -1260,7 +1260,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </p>
 </div>
 </div>
-              {previewRole === "Borrower" && (
+             {currentUserEmail && previewRole === "Borrower" && (
   <div className="mb-6 rounded-2xl border border-blue-200 bg-blue-50 p-4">
     <h3 className="mb-2 font-bold text-slate-900">Borrower Preview</h3>
     <p className="text-sm text-slate-700">
@@ -1270,7 +1270,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </div>
 )}
 
-{previewRole === "Loan Officer" && (
+{currentUserEmail && previewRole === "Loan Officer" && (
   <div className="mb-6 rounded-2xl border border-green-200 bg-green-50 p-4">
     <h3 className="mb-2 font-bold text-slate-900">Loan Officer Preview</h3>
     <p className="text-sm text-slate-700">
@@ -1280,7 +1280,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </div>
 )}
 
-{previewRole === "Admin" && (
+{currentUserEmail && previewRole === "Admin" && (
   <div className="mb-6 rounded-2xl border border-purple-200 bg-purple-50 p-4">
     <h3 className="mb-2 font-bold text-slate-900">Admin Preview</h3>
     <p className="text-sm text-slate-700">
