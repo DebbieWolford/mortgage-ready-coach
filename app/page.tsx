@@ -1150,7 +1150,11 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
       <p className="text-sm text-slate-700">
         Logged in as <span className="font-semibold">{currentUserEmail}</span>
       </p>
-
+{currentUserRole && (
+  <p className="text-sm text-slate-700">
+    Role: <span className="font-semibold">{currentUserRole}</span>
+  </p>
+)}
       <button
         onClick={handleLogout}
         className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
