@@ -706,6 +706,12 @@ const handleLogout = async () => {
                 {item}
               </button>
             ))}
+            <button
+  onClick={() => setScreen("dashboard")}
+  className="rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200"
+>
+  Log In
+</button>
           </nav>
 
           <Button className="bg-slate-950 text-white">Demo</Button>
