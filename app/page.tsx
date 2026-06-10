@@ -1216,8 +1216,8 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   )}
 
   <p className="mt-3 text-xs text-slate-500">
-    Phase 9B MVP: Account access is being added for future borrower, loan officer, and admin permissions.
-  </p>
+  Secure account access helps protect borrower information and document status.
+</p>
 </div>
               <div className={currentUserRole === "Borrower" ? "hidden" : "mb-6 rounded-2xl border bg-white p-4 shadow-sm"}>
   <label className="mb-2 block text-sm font-semibold text-slate-700">
