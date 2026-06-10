@@ -556,7 +556,18 @@ const handleLogin = async () => {
     return;
   }
 }
-  setCurrentUserRole("Borrower");
+  const { data: profileData, error: profileFetchError } = await supabase
+  .from("profiles")
+  .select("role")
+  .eq("user_id", data.user.id)
+  .single();
+
+if (profileFetchError) {
+  setAuthMessage(`Logged in, but profile role was not found: ${profileFetchError.message}`);
+  return;
+}
+
+setCurrentUserRole(profileData?.role || "Borrower");
   setAuthMessage("Logged in successfully.");
 };
 
