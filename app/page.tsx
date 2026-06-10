@@ -544,6 +544,8 @@ const handleLogin = async () => {
 const handleLogout = async () => {
   await supabase.auth.signOut();
   setCurrentUserEmail("");
+  setAuthEmail("");
+  setAuthPassword("");
   setAuthMessage("Logged out successfully.");
 };
   return (
