@@ -1224,11 +1224,12 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   Current Dashboard Role
 </label>
 
-  <select
-    value={previewRole}
-    onChange={(e) => setPreviewRole(e.target.value)}
-    className="w-full rounded-lg border px-3 py-2 text-sm md:w-64"
-  >
+ <select
+  value={previewRole}
+  onChange={(e) => setPreviewRole(e.target.value)}
+  disabled={!!currentUserEmail}
+  className="w-full rounded-lg border px-3 py-2 text-sm md:w-64 disabled:bg-slate-100 disabled:text-slate-500"
+>
     <option>Borrower</option>
     <option>Loan Officer</option>
     <option>Admin</option>
@@ -1237,6 +1238,11 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   <p className="mt-2 text-sm text-slate-600">
     Current dashboard role: {previewRole}
   </p>
+                {currentUserEmail && (
+  <p className="mt-1 text-xs text-slate-500">
+    Role is controlled by the user profile in Supabase.
+  </p>
+)}
                 <div className="mt-4 rounded-xl bg-slate-50 p-4">
   <p className="text-sm text-slate-700">
     {previewRole === "Borrower" &&
