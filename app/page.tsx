@@ -1219,7 +1219,15 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   Secure account access helps protect borrower information and document status.
 </p>
 </div>
-              <div className={currentUserRole === "Borrower" ? "hidden" : "mb-6 rounded-2xl border bg-white p-4 shadow-sm"}>
+              {!currentUserEmail && (
+  <div className="mb-6 rounded-2xl border bg-white p-5 shadow-sm">
+    <h3 className="mb-2 text-lg font-bold text-slate-900">Please log in</h3>
+    <p className="text-sm text-slate-600">
+      Log in to view your dashboard, borrower portal, document status, and account tools.
+    </p>
+  </div>
+)}
+             <div className={!currentUserEmail || currentUserRole === "Borrower" ? "hidden" : "mb-6 rounded-2xl border bg-white p-4 shadow-sm"}>
   <label className="mb-2 block text-sm font-semibold text-slate-700">
   Current Dashboard Role
 </label>
