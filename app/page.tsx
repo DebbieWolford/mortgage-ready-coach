@@ -1945,7 +1945,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   Activity Log
 </button>
 </div>
-
+{canEditLeads && (
 <button
   onClick={() => {
     setEditingLeadId(lead.id);
