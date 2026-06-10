@@ -541,7 +541,7 @@ const handleLogin = async () => {
   setCurrentUserEmail(data.user?.email || "");
   setCurrentUserId(data.user?.id || "");
   if (data.user?.id && data.user?.email) {
-  await supabase.from("profiles").upsert(
+  const { error: profileError } = await supabase.from("profiles").upsert(
     {
       user_id: data.user.id,
       email: data.user.email,
@@ -549,6 +549,11 @@ const handleLogin = async () => {
     },
     { onConflict: "user_id" }
   );
+
+  if (profileError) {
+    setAuthMessage(`Logged in, but profile was not created: ${profileError.message}`);
+    return;
+  }
 }
   setAuthMessage("Logged in successfully.");
 };
