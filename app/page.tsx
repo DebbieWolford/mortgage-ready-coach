@@ -28,6 +28,7 @@ export default function MortgageReadyCoach() {
 const [authPassword, setAuthPassword] = useState("");
 const [authMessage, setAuthMessage] = useState("");
 const [currentUserEmail, setCurrentUserEmail] = useState("");
+  const [currentUserId, setCurrentUserId] = useState("");
   const [progress, setProgress] = useState(15);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState(
@@ -538,12 +539,14 @@ const handleLogin = async () => {
   }
 
   setCurrentUserEmail(data.user?.email || "");
+  setCurrentUserId(data.user?.id || "");
   setAuthMessage("Logged in successfully.");
 };
 
 const handleLogout = async () => {
   await supabase.auth.signOut();
   setCurrentUserEmail("");
+  setCurrentUserId("");
   setAuthEmail("");
   setAuthPassword("");
   setAuthMessage("Logged out successfully.");
