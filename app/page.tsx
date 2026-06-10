@@ -1286,12 +1286,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   <p className="mb-4 text-sm text-slate-600">
     Borrowers can look up their file by email to view their readiness and document status.
   </p>
-<div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
-  <p className="text-sm text-amber-900">
-    MVP Access Notice: Borrowers can currently look up files by email for demo purposes.
-    Secure login and user roles will be added in the next phase.
-  </p>
-</div>
+
   <div className="flex flex-col gap-3 md:flex-row">
     <input
       type="email"
