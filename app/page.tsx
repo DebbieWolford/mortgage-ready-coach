@@ -30,6 +30,24 @@ const [authMessage, setAuthMessage] = useState("");
 const [currentUserEmail, setCurrentUserEmail] = useState("");
   const [currentUserId, setCurrentUserId] = useState("");
   const [currentUserRole, setCurrentUserRole] = useState("");
+  const isLoggedIn = currentUserEmail.trim() !== "";
+const isBorrower = currentUserRole === "Borrower";
+const isLoanOfficer = currentUserRole === "Loan Officer";
+const isAdmin = currentUserRole === "Admin";
+const isRealtor = currentUserRole === "Realtor";
+const isBuilder = currentUserRole === "Builder";
+
+const canViewBorrowerPortal =
+  isLoggedIn && (isBorrower || isLoanOfficer || isAdmin);
+
+const canViewLoanOfficerDashboard =
+  isLoggedIn && (isLoanOfficer || isAdmin);
+
+const canViewPartnerDashboard =
+  isLoggedIn && (isRealtor || isBuilder || isAdmin);
+
+const canViewAdminTools =
+  isLoggedIn && isAdmin;
   const [progress, setProgress] = useState(15);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState(
