@@ -1946,30 +1946,32 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </button>
 </div>
 {canEditLeads && (
-<button
-  onClick={() => {
-    setEditingLeadId(lead.id);
-    setEditLeadForm(lead);
-  }}
-  className="mt-3 mr-2 rounded-lg bg-slate-900 px-3 py-2 text-white hover:bg-slate-700"
->
-  Edit Lead
-</button>
-{canDeleteLeads && (
-<button
-  onClick={async () => {
-    await supabase
-      .from("leads")
-      .delete()
-      .eq("id", lead.id);
+  <button
+    onClick={() => {
+      setEditingLeadId(lead.id);
+      setEditLeadForm(lead);
+    }}
+    className="mt-3 mr-2 rounded-lg bg-slate-900 px-3 py-2 text-white hover:bg-slate-700"
+  >
+    Edit Lead
+  </button>
+)}
 
-    setLeads(leads.filter((l) => l.id !== lead.id));
-  }}
-  className="mt-3 rounded-lg bg-red-600 px-3 py-2 text-white hover:bg-red-700"
->
-  Delete Lead
-</button>    
-  )}
+{canDeleteLeads && (
+  <button
+    onClick={async () => {
+      await supabase
+        .from("leads")
+        .delete()
+        .eq("id", lead.id);
+
+      setLeads(leads.filter((l) => l.id !== lead.id));
+    }}
+    className="mt-3 rounded-lg bg-red-600 px-3 py-2 text-white hover:bg-red-700"
+  >
+    Delete Lead
+  </button>
+)}
       </div>
     ))}
   </div>
