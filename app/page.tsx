@@ -1745,7 +1745,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 </div>
 </div>    
   )}
-                   <div className={previewRole === "Borrower" ? "hidden" : "mt-6 rounded-2xl bg-white p-5 shadow"}>
+                   <div className={canViewLoanOfficerDashboard ? "mt-6 rounded-2xl bg-white p-5 shadow" : "hidden"}>
   <h3 className="mb-4 text-lg font-bold text-slate-800">
     Mortgage Pipeline Visualization
   </h3>
@@ -1790,8 +1790,8 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
     <span>Closed</span>
   </div>
 </div>
-  <h3 className="font-bold">Captured Leads</h3>
-  <p className="mt-2 text-3xl font-extrabold">
+  <h3 className={canViewLoanOfficerDashboard ? "font-bold" : "hidden"}>Captured Leads</h3>
+  <p className={canViewLoanOfficerDashboard ? "mt-2 text-3xl font-extrabold" : "hidden"}>
 {
   leads.filter((lead) =>
     `${lead.name} ${lead.lastName} ${lead.email} ${lead.phone}`
@@ -1801,7 +1801,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 }
 </p>
 
-  <div className="mt-4 grid gap-4 md:grid-cols-2">
+  <div className={canViewLoanOfficerDashboard ? "mt-4 grid gap-4 md:grid-cols-2" : "hidden"}>
     {leads
   .filter((lead) =>
     `${lead.name} ${lead.lastName} ${lead.email} ${lead.phone}`
