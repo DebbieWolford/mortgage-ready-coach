@@ -1294,7 +1294,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </div>
 )}
 
-{currentUserEmail && previewRole === "Loan Officer" && (
+{canViewLoanOfficerDashboard && (
   <div className="mb-6 rounded-2xl border border-green-200 bg-green-50 p-4">
     <h3 className="mb-2 font-bold text-slate-900">Loan Officer Preview</h3>
     <p className="text-sm text-slate-700">
@@ -1304,7 +1304,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
   </div>
 )}
 
-{currentUserEmail && previewRole === "Admin" && (
+{canViewAdminTools && (
   <div className="mb-6 rounded-2xl border border-purple-200 bg-purple-50 p-4">
     <h3 className="mb-2 font-bold text-slate-900">Admin Preview</h3>
     <p className="text-sm text-slate-700">
