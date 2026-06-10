@@ -1955,7 +1955,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 >
   Edit Lead
 </button>
-
+{canDeleteLeads && (
 <button
   onClick={async () => {
     await supabase
@@ -1969,6 +1969,7 @@ onChange={(e) => setLeadForm({ ...leadForm, creditScore: e.target.value })}
 >
   Delete Lead
 </button>    
+  )}
       </div>
     ))}
   </div>
